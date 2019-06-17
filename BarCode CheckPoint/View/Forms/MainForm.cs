@@ -75,7 +75,15 @@ namespace CheckPoint.View.Forms
             set => radioEntry.Checked = value;
         }
 
-        public Image Camera { get; set; }
+        public Image Camera
+        {
+            get
+            {
+                var pictureCameraImage = pictureCamera.Image;
+                return pictureCameraImage;
+            }
+            set => pictureCamera.Image = value;
+        }
         public Image CheckPhoto { get; set; }
         public Image EmployeePhoto { get; set; }
 

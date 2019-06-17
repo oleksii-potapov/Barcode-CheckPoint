@@ -43,8 +43,10 @@
             this.reportsFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureCamera = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).BeginInit();
             this.SuspendLayout();
             // 
             // textBarCode
@@ -98,7 +100,7 @@
             // labelFullName
             // 
             this.labelFullName.AutoSize = true;
-            this.labelFullName.Location = new System.Drawing.Point(305, 62);
+            this.labelFullName.Location = new System.Drawing.Point(230, 31);
             this.labelFullName.Name = "labelFullName";
             this.labelFullName.Size = new System.Drawing.Size(45, 16);
             this.labelFullName.TabIndex = 4;
@@ -107,7 +109,7 @@
             // labelPost
             // 
             this.labelPost.AutoSize = true;
-            this.labelPost.Location = new System.Drawing.Point(305, 100);
+            this.labelPost.Location = new System.Drawing.Point(230, 54);
             this.labelPost.Name = "labelPost";
             this.labelPost.Size = new System.Drawing.Size(45, 16);
             this.labelPost.TabIndex = 5;
@@ -116,7 +118,7 @@
             // labelDateTimeEntry
             // 
             this.labelDateTimeEntry.AutoSize = true;
-            this.labelDateTimeEntry.Location = new System.Drawing.Point(305, 137);
+            this.labelDateTimeEntry.Location = new System.Drawing.Point(230, 75);
             this.labelDateTimeEntry.Name = "labelDateTimeEntry";
             this.labelDateTimeEntry.Size = new System.Drawing.Size(45, 16);
             this.labelDateTimeEntry.TabIndex = 6;
@@ -125,7 +127,7 @@
             // labelDateTimeExit
             // 
             this.labelDateTimeExit.AutoSize = true;
-            this.labelDateTimeExit.Location = new System.Drawing.Point(305, 177);
+            this.labelDateTimeExit.Location = new System.Drawing.Point(230, 100);
             this.labelDateTimeExit.Name = "labelDateTimeExit";
             this.labelDateTimeExit.Size = new System.Drawing.Size(45, 16);
             this.labelDateTimeExit.TabIndex = 7;
@@ -154,7 +156,7 @@
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.propertiesToolStripMenuItem.Text = "Settings";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -169,7 +171,7 @@
             // reportsFormToolStripMenuItem
             // 
             this.reportsFormToolStripMenuItem.Name = "reportsFormToolStripMenuItem";
-            this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.reportsFormToolStripMenuItem.Text = "Reports form";
             this.reportsFormToolStripMenuItem.Click += new System.EventHandler(this.ReportsFormToolStripMenuItem_Click);
             // 
@@ -184,15 +186,29 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // pictureCamera
+            // 
+            this.pictureCamera.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureCamera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureCamera.Location = new System.Drawing.Point(12, 160);
+            this.pictureCamera.Name = "pictureCamera";
+            this.pictureCamera.Size = new System.Drawing.Size(245, 202);
+            this.pictureCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureCamera.TabIndex = 9;
+            this.pictureCamera.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 374);
+            this.Controls.Add(this.pictureCamera);
             this.Controls.Add(this.labelDateTimeExit);
             this.Controls.Add(this.labelDateTimeEntry);
             this.Controls.Add(this.labelPost);
@@ -210,6 +226,7 @@
             this.groupBox1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,6 +249,7 @@
         private System.Windows.Forms.ToolStripMenuItem reportsFormToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureCamera;
     }
 }
 

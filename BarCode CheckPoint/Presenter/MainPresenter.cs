@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CheckPoint.Model;
+using CheckPoint.Model.CameraAndPhoto;
 using CheckPoint.Model.Entities;
 using CheckPoint.Model.Repository;
 using CheckPoint.View.Interfaces;
@@ -19,6 +21,8 @@ namespace CheckPoint.Presenter
         private readonly GenericRepository<Employee> _employeeRepo;
         private readonly GenericRepository<Post> _postRepo;
         private readonly GenericRepository<ShiftCheck> _shiftCheckRepo;
+        private readonly WebCamera _webCamera;
+        private readonly Timer _cameraTimer;
 
         public MainPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
         {
@@ -28,6 +32,10 @@ namespace CheckPoint.Presenter
             _employeeRepo = new GenericRepository<Employee>(context);
             _postRepo = new GenericRepository<Post>(context);
             _shiftCheckRepo = new GenericRepository<ShiftCheck>(context);
+            _webCamera = new WebCamera();
+            // show web-camera image
+            _cameraTimer = new Timer((obj) => _view.Camera = _webCamera.GetImage(), 
+                new AutoResetEvent(false), 500, 50);
 
             _view.EmployeeChecked += _view_EmployeeChecked;
             _view.CheckFormClick += _view_CheckFormClick;
@@ -45,6 +53,7 @@ namespace CheckPoint.Presenter
 
         private void _view_FormShow(object sender, EventArgs e)
         {
+
         }
 
         private void _view_SettingsClick(object sender, EventArgs e)
