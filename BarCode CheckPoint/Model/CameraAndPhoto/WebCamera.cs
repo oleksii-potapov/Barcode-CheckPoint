@@ -14,12 +14,15 @@ namespace CheckPoint.Model.CameraAndPhoto
     {
         private readonly VideoCapture _capture;
         private readonly Mat _mat;
+        private Bitmap _snapshot;
 
         public WebCamera(int cameraIndex = 0)
         {
             _capture = new VideoCapture(cameraIndex);
             _mat = new Mat();
         }
+
+        public Bitmap Snapshot => _snapshot;
 
         public Bitmap GetImage()
         {
@@ -29,7 +32,13 @@ namespace CheckPoint.Model.CameraAndPhoto
 
         public void SaveImageToFile(string imagePath)
         {
+            _snapshot = _mat.Bitmap;
             _mat?.Bitmap.Save(imagePath);
+        }
+        public async void SaveImageToFileAsync(string imagePath)
+        {
+            _snapshot = _mat.Bitmap;
+            await Task.Run(() => _mat?.Bitmap.Save(imagePath));
         }
     }
 }

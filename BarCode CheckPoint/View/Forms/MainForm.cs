@@ -79,12 +79,21 @@ namespace CheckPoint.View.Forms
         {
             get
             {
-                var pictureCameraImage = pictureCamera.Image;
-                return pictureCameraImage;
+                var picture = pictureCamera.Image;
+                return picture;
             }
             set => pictureCamera.Image = value;
         }
-        public Image CheckPhoto { get; set; }
+
+        public Image CheckPhoto
+        {
+            get
+            {
+                var picture = pictureCheckPhoto.Image;
+                return picture;
+            }
+            set => pictureCheckPhoto.Image = value;
+        }
         public Image EmployeePhoto { get; set; }
 
         #endregion

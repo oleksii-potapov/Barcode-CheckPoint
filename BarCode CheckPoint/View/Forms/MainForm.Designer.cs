@@ -44,9 +44,11 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureCamera = new System.Windows.Forms.PictureBox();
+            this.pictureCheckPhoto = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureCheckPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // textBarCode
@@ -192,9 +194,6 @@
             // 
             // pictureCamera
             // 
-            this.pictureCamera.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureCamera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureCamera.Location = new System.Drawing.Point(12, 160);
             this.pictureCamera.Name = "pictureCamera";
@@ -203,11 +202,22 @@
             this.pictureCamera.TabIndex = 9;
             this.pictureCamera.TabStop = false;
             // 
+            // pictureCheckPhoto
+            // 
+            this.pictureCheckPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureCheckPhoto.Location = new System.Drawing.Point(305, 160);
+            this.pictureCheckPhoto.Name = "pictureCheckPhoto";
+            this.pictureCheckPhoto.Size = new System.Drawing.Size(245, 202);
+            this.pictureCheckPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureCheckPhoto.TabIndex = 10;
+            this.pictureCheckPhoto.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 374);
+            this.Controls.Add(this.pictureCheckPhoto);
             this.Controls.Add(this.pictureCamera);
             this.Controls.Add(this.labelDateTimeExit);
             this.Controls.Add(this.labelDateTimeEntry);
@@ -227,6 +237,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureCheckPhoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,6 +261,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureCamera;
+        private System.Windows.Forms.PictureBox pictureCheckPhoto;
     }
 }
 

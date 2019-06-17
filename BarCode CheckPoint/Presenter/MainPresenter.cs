@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -121,6 +122,8 @@ namespace CheckPoint.Presenter
             _view.Post = shiftCheck.Employee.Post.Name;
             _view.DateTimeEntry = shiftCheck.DateTimeEntry;
             _view.DateTimeExit = shiftCheck.DateTimeExit;
+            _webCamera.SaveImageToFileAsync(shiftCheck.Employee.FullName + ".jpg");
+            _view.CheckPhoto = _webCamera.Snapshot;
         }
     }
 }
