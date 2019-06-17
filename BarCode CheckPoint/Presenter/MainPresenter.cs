@@ -87,7 +87,7 @@ namespace CheckPoint.Presenter
                 if (lastShift == null
                     || lastShift.DateTimeExit.HasValue 
                     || lastShift.DateTimeEntry.HasValue 
-                    && DateTime.Now - lastShift.DateTimeEntry.Value > TimeSpan.FromDays(1))
+                    && DateTime.Now - lastShift.DateTimeEntry.Value > TimeSpan.FromHours(Properties.Settings.Default.MaxShiftInHours))
                 {
                     ShiftCheck shift = new ShiftCheck()
                     {

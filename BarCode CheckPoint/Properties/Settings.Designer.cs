@@ -22,5 +22,17 @@ namespace CheckPoint.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("24")]
+        public int MaxShiftInHours {
+            get {
+                return ((int)(this["MaxShiftInHours"]));
+            }
+            set {
+                this["MaxShiftInHours"] = value;
+            }
+        }
     }
 }

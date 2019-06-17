@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using CheckPoint.Model.Entities;
 
 namespace CheckPoint.View.Interfaces
 {

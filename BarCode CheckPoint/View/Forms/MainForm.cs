@@ -96,6 +96,7 @@ namespace CheckPoint.View.Forms
         private void MainForm_Shown(object sender, EventArgs e)
         {
             FormShow?.Invoke(sender, EventArgs.Empty);
+            textBarCode.Focus();
         }
 
         public void CloseForm()

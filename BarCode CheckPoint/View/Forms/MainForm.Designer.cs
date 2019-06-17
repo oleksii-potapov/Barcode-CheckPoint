@@ -63,16 +63,18 @@
             this.groupBox1.Controls.Add(this.radioEntry);
             this.groupBox1.Location = new System.Drawing.Point(13, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 62);
+            this.groupBox1.Size = new System.Drawing.Size(191, 78);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
             // radioExit
             // 
             this.radioExit.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioExit.Location = new System.Drawing.Point(108, 21);
+            this.radioExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioExit.ForeColor = System.Drawing.Color.DarkBlue;
+            this.radioExit.Location = new System.Drawing.Point(111, 21);
             this.radioExit.Name = "radioExit";
-            this.radioExit.Size = new System.Drawing.Size(60, 26);
+            this.radioExit.Size = new System.Drawing.Size(60, 41);
             this.radioExit.TabIndex = 4;
             this.radioExit.Text = "Exit";
             this.radioExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -82,12 +84,14 @@
             // 
             this.radioEntry.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioEntry.Checked = true;
-            this.radioEntry.Location = new System.Drawing.Point(23, 21);
+            this.radioEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioEntry.ForeColor = System.Drawing.Color.DarkGreen;
+            this.radioEntry.Location = new System.Drawing.Point(21, 21);
             this.radioEntry.Name = "radioEntry";
-            this.radioEntry.Size = new System.Drawing.Size(60, 26);
+            this.radioEntry.Size = new System.Drawing.Size(60, 41);
             this.radioEntry.TabIndex = 3;
             this.radioEntry.TabStop = true;
-            this.radioEntry.Text = "Enter";
+            this.radioEntry.Text = "Entry";
             this.radioEntry.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioEntry.UseVisualStyleBackColor = true;
             // 
