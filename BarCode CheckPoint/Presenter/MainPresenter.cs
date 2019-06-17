@@ -109,7 +109,7 @@ namespace CheckPoint.Presenter
         private void ShowLastCheck(ShiftCheck shiftCheck)
         {
             _view.FullName = shiftCheck.Employee.FullName;
-//            _view.Post = shiftCheck.Employee.Post.ToString();
+            _view.Post = shiftCheck.Employee.Post.Name;
             _view.DateTimeEntry = shiftCheck.DateTimeEntry;
             _view.DateTimeExit = shiftCheck.DateTimeExit;
         }
