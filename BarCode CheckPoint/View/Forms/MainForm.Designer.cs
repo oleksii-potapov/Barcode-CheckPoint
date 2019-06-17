@@ -150,8 +150,9 @@
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.propertiesToolStripMenuItem.Text = "Application properties";
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.propertiesToolStripMenuItem.Text = "Settings";
+            this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -166,6 +167,7 @@
             this.reportsFormToolStripMenuItem.Name = "reportsFormToolStripMenuItem";
             this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reportsFormToolStripMenuItem.Text = "Reports form";
+            this.reportsFormToolStripMenuItem.Click += new System.EventHandler(this.ReportsFormToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -180,6 +182,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // MainForm
             // 

@@ -22,6 +22,7 @@ namespace CheckPoint.View.Interfaces
         event EventHandler EmployeeChecked;
         event EventHandler SettingsClick;
         event EventHandler ReportsClick;
+        event EventHandler AboutClick;
         event EventHandler CheckFormClick;
         event EventHandler FormShow;
         event EventHandler FormClose;

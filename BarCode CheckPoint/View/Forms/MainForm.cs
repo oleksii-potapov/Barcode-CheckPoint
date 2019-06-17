@@ -86,6 +86,7 @@ namespace CheckPoint.View.Forms
         public event EventHandler EmployeeChecked;
         public event EventHandler SettingsClick;
         public event EventHandler ReportsClick;
+        public event EventHandler AboutClick;
         public event EventHandler CheckFormClick;
         public event EventHandler FormShow;
         public event EventHandler FormClose;
@@ -117,6 +118,21 @@ namespace CheckPoint.View.Forms
             {
                 EmployeeChecked?.Invoke(sender, EventArgs.Empty);
             }
+        }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsClick?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void ReportsFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportsClick?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutClick?.Invoke(sender, EventArgs.Empty);
         }
     }
 }
