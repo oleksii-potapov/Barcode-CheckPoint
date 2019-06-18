@@ -29,22 +29,24 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textDataBaseServer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textDataBaseName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textPlotCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textCheckPhotoFolder = new System.Windows.Forms.TextBox();
+            this.buttonBrowseCheckPhotoFolder = new System.Windows.Forms.Button();
+            this.buttonBrowseEmployeePhotoFolder = new System.Windows.Forms.Button();
+            this.textEmployeePhotoFolder = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericMaxShiftLength = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.comboCameraList = new System.Windows.Forms.ComboBox();
+            this.buttonApplySettings = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMaxShiftLength)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -56,12 +58,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "DataBase Server";
             // 
-            // textBox1
+            // textDataBaseServer
             // 
-            this.textBox1.Location = new System.Drawing.Point(163, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(192, 20);
-            this.textBox1.TabIndex = 1;
+            this.textDataBaseServer.Location = new System.Drawing.Point(163, 6);
+            this.textDataBaseServer.Name = "textDataBaseServer";
+            this.textDataBaseServer.Size = new System.Drawing.Size(192, 20);
+            this.textDataBaseServer.TabIndex = 1;
             // 
             // label2
             // 
@@ -72,12 +74,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "DataBase Name";
             // 
-            // textBox2
+            // textDataBaseName
             // 
-            this.textBox2.Location = new System.Drawing.Point(163, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(192, 20);
-            this.textBox2.TabIndex = 3;
+            this.textDataBaseName.Location = new System.Drawing.Point(163, 36);
+            this.textDataBaseName.Name = "textDataBaseName";
+            this.textDataBaseName.Size = new System.Drawing.Size(192, 20);
+            this.textDataBaseName.TabIndex = 3;
             // 
             // label3
             // 
@@ -88,12 +90,12 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Plot Code";
             // 
-            // textBox3
+            // textPlotCode
             // 
-            this.textBox3.Location = new System.Drawing.Point(163, 69);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(192, 20);
-            this.textBox3.TabIndex = 5;
+            this.textPlotCode.Location = new System.Drawing.Point(163, 69);
+            this.textPlotCode.Name = "textPlotCode";
+            this.textPlotCode.Size = new System.Drawing.Size(192, 20);
+            this.textPlotCode.TabIndex = 5;
             // 
             // label4
             // 
@@ -104,37 +106,37 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Folder with check photos";
             // 
-            // textBox4
+            // textCheckPhotoFolder
             // 
-            this.textBox4.Location = new System.Drawing.Point(163, 102);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(192, 20);
-            this.textBox4.TabIndex = 7;
+            this.textCheckPhotoFolder.Location = new System.Drawing.Point(163, 102);
+            this.textCheckPhotoFolder.Name = "textCheckPhotoFolder";
+            this.textCheckPhotoFolder.Size = new System.Drawing.Size(192, 20);
+            this.textCheckPhotoFolder.TabIndex = 7;
             // 
-            // button1
+            // buttonBrowseCheckPhotoFolder
             // 
-            this.button1.Location = new System.Drawing.Point(361, 102);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 20);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Browse";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonBrowseCheckPhotoFolder.Location = new System.Drawing.Point(361, 102);
+            this.buttonBrowseCheckPhotoFolder.Name = "buttonBrowseCheckPhotoFolder";
+            this.buttonBrowseCheckPhotoFolder.Size = new System.Drawing.Size(70, 20);
+            this.buttonBrowseCheckPhotoFolder.TabIndex = 8;
+            this.buttonBrowseCheckPhotoFolder.Text = "Browse";
+            this.buttonBrowseCheckPhotoFolder.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // buttonBrowseEmployeePhotoFolder
             // 
-            this.button2.Location = new System.Drawing.Point(361, 137);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 20);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Browse";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonBrowseEmployeePhotoFolder.Location = new System.Drawing.Point(361, 137);
+            this.buttonBrowseEmployeePhotoFolder.Name = "buttonBrowseEmployeePhotoFolder";
+            this.buttonBrowseEmployeePhotoFolder.Size = new System.Drawing.Size(70, 20);
+            this.buttonBrowseEmployeePhotoFolder.TabIndex = 11;
+            this.buttonBrowseEmployeePhotoFolder.Text = "Browse";
+            this.buttonBrowseEmployeePhotoFolder.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // textEmployeePhotoFolder
             // 
-            this.textBox5.Location = new System.Drawing.Point(163, 137);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(192, 20);
-            this.textBox5.TabIndex = 10;
+            this.textEmployeePhotoFolder.Location = new System.Drawing.Point(163, 137);
+            this.textEmployeePhotoFolder.Name = "textEmployeePhotoFolder";
+            this.textEmployeePhotoFolder.Size = new System.Drawing.Size(192, 20);
+            this.textEmployeePhotoFolder.TabIndex = 10;
             // 
             // label5
             // 
@@ -154,12 +156,22 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Max length of shift in hours";
             // 
-            // numericUpDown1
+            // numericMaxShiftLength
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(163, 172);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(192, 20);
-            this.numericUpDown1.TabIndex = 13;
+            this.numericMaxShiftLength.Location = new System.Drawing.Point(163, 172);
+            this.numericMaxShiftLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMaxShiftLength.Name = "numericMaxShiftLength";
+            this.numericMaxShiftLength.Size = new System.Drawing.Size(192, 20);
+            this.numericMaxShiftLength.TabIndex = 13;
+            this.numericMaxShiftLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label7
             // 
@@ -170,38 +182,60 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Camera";
             // 
-            // comboBox1
+            // comboCameraList
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(163, 210);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 21);
-            this.comboBox1.TabIndex = 15;
+            this.comboCameraList.FormattingEnabled = true;
+            this.comboCameraList.Location = new System.Drawing.Point(163, 210);
+            this.comboCameraList.Name = "comboCameraList";
+            this.comboCameraList.Size = new System.Drawing.Size(192, 21);
+            this.comboCameraList.TabIndex = 15;
+            // 
+            // buttonApplySettings
+            // 
+            this.buttonApplySettings.Location = new System.Drawing.Point(265, 286);
+            this.buttonApplySettings.Name = "buttonApplySettings";
+            this.buttonApplySettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonApplySettings.TabIndex = 16;
+            this.buttonApplySettings.Text = "Ok";
+            this.buttonApplySettings.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(356, 286);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 17;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 343);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(445, 325);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonApplySettings);
+            this.Controls.Add(this.comboCameraList);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericMaxShiftLength);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.buttonBrowseEmployeePhotoFolder);
+            this.Controls.Add(this.textEmployeePhotoFolder);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.buttonBrowseCheckPhotoFolder);
+            this.Controls.Add(this.textCheckPhotoFolder);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textPlotCode);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textDataBaseName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textDataBaseServer);
             this.Controls.Add(this.label1);
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericMaxShiftLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,20 +244,22 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textDataBaseServer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textDataBaseName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textPlotCode;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textCheckPhotoFolder;
+        private System.Windows.Forms.Button buttonBrowseCheckPhotoFolder;
+        private System.Windows.Forms.Button buttonBrowseEmployeePhotoFolder;
+        private System.Windows.Forms.TextBox textEmployeePhotoFolder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericMaxShiftLength;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboCameraList;
+        private System.Windows.Forms.Button buttonApplySettings;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }

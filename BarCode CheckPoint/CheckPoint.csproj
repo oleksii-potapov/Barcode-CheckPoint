@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -74,7 +75,7 @@
     <Compile Include="Model\Repository\GenericRepository.cs" />
     <Compile Include="Model\Repository\IGenericRepository.cs" />
     <Compile Include="Presenter\MainFormPresenter.cs" />
-    <Compile Include="Presenter\SettingsPresenter.cs" />
+    <Compile Include="Presenter\SettingsFormPresenter.cs" />
     <Compile Include="View\Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

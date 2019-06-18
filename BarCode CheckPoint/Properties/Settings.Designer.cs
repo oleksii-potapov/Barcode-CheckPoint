@@ -46,5 +46,41 @@ namespace CheckPoint.Properties {
                 this["CheckPhotoFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CameraIndex {
+            get {
+                return ((int)(this["CameraIndex"]));
+            }
+            set {
+                this["CameraIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EmployeePhotoFolder {
+            get {
+                return ((string)(this["EmployeePhotoFolder"]));
+            }
+            set {
+                this["EmployeePhotoFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PlotCode {
+            get {
+                return ((string)(this["PlotCode"]));
+            }
+            set {
+                this["PlotCode"] = value;
+            }
+        }
     }
 }
