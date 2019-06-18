@@ -75,14 +75,29 @@ namespace CheckPoint.View.Forms
 
         public event EventHandler FormShow;
         public event EventHandler ApplySettings;
-        public event EventHandler ShowOpenDialog;
-        public event EventHandler ShowFolderDialog;
-
-        #endregion
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             FormShow?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void ButtonApplySettings_Click(object sender, EventArgs e)
+        {
+            ApplySettings?.Invoke(sender, EventArgs.Empty);
+        }
+
+        #endregion
+
+        private void ButtonBrowseCheckPhotoFolder_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                textCheckPhotoFolder.Text = folderBrowserDialog.SelectedPath;
+        }
+
+        private void ButtonBrowseEmployeePhotoFolder_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                textEmployeePhotoFolder.Text = folderBrowserDialog.SelectedPath;
         }
     }
 }

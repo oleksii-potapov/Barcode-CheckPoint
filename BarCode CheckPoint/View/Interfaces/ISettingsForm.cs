@@ -20,7 +20,5 @@ namespace CheckPoint.View.Interfaces
 
         event EventHandler FormShow;
         event EventHandler ApplySettings;
-        event EventHandler ShowOpenDialog;
-        event EventHandler ShowFolderDialog;
     }
 }

@@ -46,6 +46,7 @@
             this.comboCameraList = new System.Windows.Forms.ComboBox();
             this.buttonApplySettings = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxShiftLength)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +122,7 @@
             this.buttonBrowseCheckPhotoFolder.TabIndex = 8;
             this.buttonBrowseCheckPhotoFolder.Text = "Browse";
             this.buttonBrowseCheckPhotoFolder.UseVisualStyleBackColor = true;
+            this.buttonBrowseCheckPhotoFolder.Click += new System.EventHandler(this.ButtonBrowseCheckPhotoFolder_Click);
             // 
             // buttonBrowseEmployeePhotoFolder
             // 
@@ -130,6 +132,7 @@
             this.buttonBrowseEmployeePhotoFolder.TabIndex = 11;
             this.buttonBrowseEmployeePhotoFolder.Text = "Browse";
             this.buttonBrowseEmployeePhotoFolder.UseVisualStyleBackColor = true;
+            this.buttonBrowseEmployeePhotoFolder.Click += new System.EventHandler(this.ButtonBrowseEmployeePhotoFolder_Click);
             // 
             // textEmployeePhotoFolder
             // 
@@ -198,6 +201,7 @@
             this.buttonApplySettings.TabIndex = 16;
             this.buttonApplySettings.Text = "Ok";
             this.buttonApplySettings.UseVisualStyleBackColor = true;
+            this.buttonApplySettings.Click += new System.EventHandler(this.ButtonApplySettings_Click);
             // 
             // buttonCancel
             // 
@@ -261,5 +265,6 @@
         private System.Windows.Forms.ComboBox comboCameraList;
         private System.Windows.Forms.Button buttonApplySettings;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }

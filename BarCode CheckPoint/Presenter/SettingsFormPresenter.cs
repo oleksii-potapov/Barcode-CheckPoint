@@ -22,6 +22,24 @@ namespace CheckPoint.Presenter
             _messageService = messageService;
 
             _view.FormShow += _view_FormShow;
+            _view.ApplySettings += _view_ApplySettings;
+        }
+
+        private void _view_ApplySettings(object sender, EventArgs e)
+        {
+            SqlConnectionStringBuilder stringBuilder =
+                new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["CheckPointDB"].ConnectionString)
+                {
+                    DataSource = _view.DataBaseServer,
+                    InitialCatalog = _view.DataBaseName
+                };
+            ConfigurationManager.ConnectionStrings["CheckPointCB"].ConnectionString = stringBuilder.ConnectionString;
+            Properties.Settings.Default.CameraIndex = _view.CameraIndex;
+            Properties.Settings.Default.CheckPhotoFolder = _view.CheckPhotoFolder;
+            Properties.Settings.Default.EmployeePhotoFolder = _view.EmployeePhotoFolder;
+            Properties.Settings.Default.PlotCode = _view.PlotCode;
+            Properties.Settings.Default.MaxShiftInHours = _view.MaxShiftInHours;
+            _messageService.ShowWarning("Program must be reopen!");
         }
 
         private void _view_FormShow(object sender, EventArgs e)
@@ -31,6 +49,8 @@ namespace CheckPoint.Presenter
             _view.DataBaseServer = stringBuilder.DataSource;
             _view.DataBaseName = stringBuilder.InitialCatalog;
             _view.CameraIndex = Properties.Settings.Default.CameraIndex;
+            _view.PlotCode = Properties.Settings.Default.PlotCode;
+            _view.MaxShiftInHours = Properties.Settings.Default.MaxShiftInHours;
 
             var folder = Properties.Settings.Default.CheckPhotoFolder;
             if (folder != string.Empty)
@@ -51,8 +71,6 @@ namespace CheckPoint.Presenter
                 if (!Directory.Exists(_view.EmployeePhotoFolder))
                     Directory.CreateDirectory(_view.EmployeePhotoFolder);
             }
-
-            _view.MaxShiftInHours = Properties.Settings.Default.MaxShiftInHours;
         }
     }
 }
