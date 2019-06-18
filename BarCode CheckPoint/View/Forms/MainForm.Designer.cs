@@ -36,7 +36,7 @@
             this.labelPost = new System.Windows.Forms.Label();
             this.labelDateTimeEntry = new System.Windows.Forms.Label();
             this.labelDateTimeExit = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuMainMenu = new System.Windows.Forms.MenuStrip();
             this.serviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +46,7 @@
             this.pictureCamera = new System.Windows.Forms.PictureBox();
             this.pictureCheckPhoto = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCheckPhoto)).BeginInit();
             this.SuspendLayout();
@@ -135,17 +135,16 @@
             this.labelDateTimeExit.TabIndex = 7;
             this.labelDateTimeExit.Text = "label4";
             // 
-            // menuStrip1
+            // menuMainMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.serviceToolStripMenuItem,
             this.reportsToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(606, 24);
-            this.menuStrip1.TabIndex = 8;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuMainMenu.Location = new System.Drawing.Point(0, 0);
+            this.menuMainMenu.Name = "menuMainMenu";
+            this.menuMainMenu.Size = new System.Drawing.Size(606, 24);
+            this.menuMainMenu.TabIndex = 8;
             // 
             // serviceToolStripMenuItem
             // 
@@ -225,17 +224,18 @@
             this.Controls.Add(this.labelFullName);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBarCode);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuMainMenu);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuMainMenu;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Barcode Checkpoint";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.groupBox1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuMainMenu.ResumeLayout(false);
+            this.menuMainMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCheckPhoto)).EndInit();
             this.ResumeLayout(false);
@@ -253,7 +253,7 @@
         private System.Windows.Forms.Label labelPost;
         private System.Windows.Forms.Label labelDateTimeEntry;
         private System.Windows.Forms.Label labelDateTimeExit;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuMainMenu;
         private System.Windows.Forms.ToolStripMenuItem serviceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;

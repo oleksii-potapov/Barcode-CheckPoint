@@ -14,7 +14,7 @@ using CheckPoint.View.Interfaces;
 
 namespace CheckPoint.Presenter
 {
-    class MainPresenter
+    class MainFormPresenter
     {
         private readonly IMainForm _view;
         private readonly IMessageService _messageService;
@@ -25,7 +25,7 @@ namespace CheckPoint.Presenter
         private readonly WebCamera _webCamera;
         private readonly Timer _cameraTimer;
 
-        public MainPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
+        public MainFormPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
         {
             _view = mainForm;
             _messageService = messageService;
@@ -48,8 +48,11 @@ namespace CheckPoint.Presenter
 
         private void _view_FormClose(object sender, EventArgs e)
         {
-            if (_messageService.ShowQuestion("Close programm?")== true)
+            if (_messageService.ShowQuestion("Close programm?") == true)
+            {
+                _model.Dispose();
                 _view.CloseForm();
+            }
         }
 
         private void _view_FormShow(object sender, EventArgs e)

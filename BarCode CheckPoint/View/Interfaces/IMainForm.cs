@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace CheckPoint.View.Interfaces
 {
-    interface IMainForm
+    public interface IMainForm
     {
         string BarCode { get; set; }
         string FullName { get; set; }

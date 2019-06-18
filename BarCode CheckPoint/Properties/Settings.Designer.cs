@@ -34,5 +34,17 @@ namespace CheckPoint.Properties {
                 this["MaxShiftInHours"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CheckPhotoFolder {
+            get {
+                return ((string)(this["CheckPhotoFolder"]));
+            }
+            set {
+                this["CheckPhotoFolder"] = value;
+            }
+        }
     }
 }

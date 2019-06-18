@@ -22,7 +22,7 @@ namespace CheckPoint
             IMainForm mainForm = new MainForm();
             IMessageService messageService = new MessageService();
             CheckPoint.Model.ApplicationContext context = new CheckPoint.Model.ApplicationContext();
-            MainPresenter presenter = new MainPresenter(mainForm, messageService, context);
+            MainFormPresenter presenter = new MainFormPresenter(mainForm, messageService, context);
             Application.Run((Form) mainForm);
         }
     }
