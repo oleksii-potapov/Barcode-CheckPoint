@@ -14,6 +14,7 @@ namespace CheckPoint.View.Interfaces
         Image Camera { get; set; }
         Image CheckPhoto { get; set; }
         Image EmployeePhoto { get; set; }
+        string ProcessStatus { get; set; }
 
         void CloseForm();
 

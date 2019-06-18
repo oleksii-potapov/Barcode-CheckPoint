@@ -74,6 +74,7 @@
     <Compile Include="Model\Entities\ShiftCheck.cs" />
     <Compile Include="Model\Repository\GenericRepository.cs" />
     <Compile Include="Model\Repository\IGenericRepository.cs" />
+    <Compile Include="Presenter\ApplicationPresenter.cs" />
     <Compile Include="Presenter\MainFormPresenter.cs" />
     <Compile Include="Presenter\SettingsFormPresenter.cs" />
     <Compile Include="View\Forms\SettingsForm.cs">

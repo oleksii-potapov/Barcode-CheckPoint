@@ -19,11 +19,8 @@ namespace CheckPoint
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            IMainForm mainForm = new MainForm();
-            IMessageService messageService = new MessageService();
-            CheckPoint.Model.ApplicationContext context = new CheckPoint.Model.ApplicationContext();
-            MainFormPresenter presenter = new MainFormPresenter(mainForm, messageService, context);
-            Application.Run((Form) mainForm);
+            ApplicationPresenter presenter = ApplicationPresenter.GetInstance();
+            Application.Run((Form) presenter.GetMainForm());
         }
     }
 }

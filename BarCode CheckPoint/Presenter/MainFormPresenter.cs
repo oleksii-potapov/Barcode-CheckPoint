@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,24 +20,25 @@ namespace CheckPoint.Presenter
     {
         private readonly IMainForm _view;
         private readonly IMessageService _messageService;
-        private readonly ApplicationContext _model;
+        private readonly ApplicationContext _context;
         private readonly GenericRepository<Employee> _employeeRepo;
         private readonly GenericRepository<Post> _postRepo;
         private readonly GenericRepository<ShiftCheck> _shiftCheckRepo;
         private readonly WebCamera _webCamera;
         private readonly Timer _cameraTimer;
+        public IMainForm View => _view;
 
         public MainFormPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
         {
             _view = mainForm;
             _messageService = messageService;
-            _model = context;
+            _context = context;
             _employeeRepo = new GenericRepository<Employee>(context);
             _postRepo = new GenericRepository<Post>(context);
             _shiftCheckRepo = new GenericRepository<ShiftCheck>(context);
             _webCamera = new WebCamera();
             // show web-camera image
-            _cameraTimer = new Timer((obj) => _view.Camera = _webCamera.GetImage(), 
+            _cameraTimer = new Timer((obj) => _view.Camera = _webCamera.GetImage(),
                 new AutoResetEvent(false), 500, 50);
 
             _view.EmployeeChecked += _view_EmployeeChecked;
@@ -50,12 +53,12 @@ namespace CheckPoint.Presenter
         {
             if (_messageService.ShowQuestion("Close programm?") == true)
             {
-                _model.Dispose();
+                _context.Dispose();
                 _view.CloseForm();
             }
         }
 
-        private void _view_FormShow(object sender, EventArgs e)
+        private async void _view_FormShow(object sender, EventArgs e)
         {
 
         }
@@ -79,10 +82,9 @@ namespace CheckPoint.Presenter
         {
             if (_view.BarCode == string.Empty)
                 return;
-            if (_model.Employees.Find(_view.BarCode) == null)
+            if (_context.Employees.Find(_view.BarCode) == null)
                 return;
-            
-            
+
             if (_view.IsEntry)
             {
                 ShiftCheck shift = new ShiftCheck()
@@ -98,9 +100,10 @@ namespace CheckPoint.Presenter
                 var shifts = _shiftCheckRepo.GetItems(s => s.BarCode == _view.BarCode);
                 var lastShift = shifts.OrderByDescending(s => s.DateTimeEntry).FirstOrDefault();
                 if (lastShift == null
-                    || lastShift.DateTimeExit.HasValue 
-                    || lastShift.DateTimeEntry.HasValue 
-                    && DateTime.Now - lastShift.DateTimeEntry.Value > TimeSpan.FromHours(Properties.Settings.Default.MaxShiftInHours))
+                    || lastShift.DateTimeExit.HasValue
+                    || lastShift.DateTimeEntry.HasValue
+                    && DateTime.Now - lastShift.DateTimeEntry.Value >
+                    TimeSpan.FromHours(Properties.Settings.Default.MaxShiftInHours))
                 {
                     ShiftCheck shift = new ShiftCheck()
                     {

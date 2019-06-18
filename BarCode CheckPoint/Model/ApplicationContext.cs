@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using CheckPoint.Model.Entities;
 
 namespace CheckPoint.Model
@@ -44,5 +48,4 @@ namespace CheckPoint.Model
             context.SaveChanges();
         }
     }
-
 }

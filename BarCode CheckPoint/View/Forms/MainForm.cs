@@ -95,6 +95,11 @@ namespace CheckPoint.View.Forms
             set => pictureCheckPhoto.Image = value;
         }
         public Image EmployeePhoto { get; set; }
+        public string ProcessStatus
+        {
+            get => toolStripStatus.Text;
+            set => toolStripStatus.Text = value;
+        }
 
         #endregion
 
