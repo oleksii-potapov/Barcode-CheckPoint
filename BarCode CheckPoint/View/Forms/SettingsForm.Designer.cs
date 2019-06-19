@@ -237,6 +237,7 @@
             this.Controls.Add(this.textDataBaseServer);
             this.Controls.Add(this.label1);
             this.Name = "SettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SettingsForm";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxShiftLength)).EndInit();

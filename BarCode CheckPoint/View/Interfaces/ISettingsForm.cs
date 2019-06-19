@@ -15,7 +15,10 @@ namespace CheckPoint.View.Interfaces
         int InterfaceLanguage { get; set; }
         IList<string> CameraList { get; set; }
 
-        event EventHandler FormShow;
+        event EventHandler OnFormShow;
         event EventHandler ApplySettings;
+
+        void ShowForm();
+        void CloseForm();
     }
 }

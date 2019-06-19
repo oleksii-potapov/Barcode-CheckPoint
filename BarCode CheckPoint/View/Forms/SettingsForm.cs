@@ -68,12 +68,21 @@ namespace CheckPoint.View.Forms
 
         #region Events
 
-        public event EventHandler FormShow;
+        public event EventHandler OnFormShow;
         public event EventHandler ApplySettings;
+        public void ShowForm()
+        {
+            Show();
+        }
+
+        public void CloseForm()
+        {
+            Close();
+        }
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            FormShow?.Invoke(sender, EventArgs.Empty);
+            OnFormShow?.Invoke(sender, EventArgs.Empty);
         }
 
         private void ButtonApplySettings_Click(object sender, EventArgs e)

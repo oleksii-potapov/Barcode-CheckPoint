@@ -105,19 +105,24 @@ namespace CheckPoint.View.Forms
 
         #region Events
 
+        public void ShowForm()
+        {
+            Show();
+        }
+
         public event EventHandler EmployeeChecked;
         public event EventHandler SettingsClick;
         public event EventHandler ReportsClick;
         public event EventHandler AboutClick;
         public event EventHandler CheckFormClick;
-        public event EventHandler FormShow;
-        public event EventHandler FormClose;
+        public event EventHandler OnFormShow;
+        public event EventHandler OnFormClose;
 
         #endregion
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            FormShow?.Invoke(sender, EventArgs.Empty);
+            OnFormShow?.Invoke(sender, EventArgs.Empty);
             textBarCode.Focus();
         }
 
@@ -131,7 +136,7 @@ namespace CheckPoint.View.Forms
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                FormClose?.Invoke(sender, e);
+                OnFormClose?.Invoke(sender, e);
             }
         }
 

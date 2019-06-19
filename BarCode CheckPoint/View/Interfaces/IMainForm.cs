@@ -17,13 +17,14 @@ namespace CheckPoint.View.Interfaces
         string ProcessStatus { get; set; }
 
         void CloseForm();
+        void ShowForm();
 
         event EventHandler EmployeeChecked;
         event EventHandler SettingsClick;
         event EventHandler ReportsClick;
         event EventHandler AboutClick;
         event EventHandler CheckFormClick;
-        event EventHandler FormShow;
-        event EventHandler FormClose;
+        event EventHandler OnFormShow;
+        event EventHandler OnFormClose;
     }
 }

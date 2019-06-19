@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using CheckPoint.Model;
 using CheckPoint.Model.CameraAndPhoto;
 using CheckPoint.Model.Entities;
@@ -18,7 +12,6 @@ namespace CheckPoint.Presenter
 {
     class MainFormPresenter
     {
-        private readonly IMainForm _view;
         private readonly IMessageService _messageService;
         private readonly ApplicationContext _context;
         private readonly GenericRepository<Employee> _employeeRepo;
@@ -26,11 +19,13 @@ namespace CheckPoint.Presenter
         private readonly GenericRepository<ShiftCheck> _shiftCheckRepo;
         private readonly WebCamera _webCamera;
         private readonly Timer _cameraTimer;
-        public IMainForm View => _view;
+        public IMainForm View { get; }
+
+        public event EventHandler SettingsFormShow;
 
         public MainFormPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
         {
-            _view = mainForm;
+            View = mainForm;
             _messageService = messageService;
             _context = context;
             _employeeRepo = new GenericRepository<Employee>(context);
@@ -38,34 +33,34 @@ namespace CheckPoint.Presenter
             _shiftCheckRepo = new GenericRepository<ShiftCheck>(context);
             _webCamera = new WebCamera();
             // show web-camera image
-            _cameraTimer = new Timer((obj) => _view.Camera = _webCamera.GetImage(),
+            _cameraTimer = new Timer((obj) => View.Camera = _webCamera.GetImage(),
                 new AutoResetEvent(false), 500, 50);
 
-            _view.EmployeeChecked += _view_EmployeeChecked;
-            _view.CheckFormClick += _view_CheckFormClick;
-            _view.ReportsClick += _view_ReportsClick;
-            _view.SettingsClick += _view_SettingsClick;
-            _view.FormShow += _view_FormShow;
-            _view.FormClose += _view_FormClose;
+            View.EmployeeChecked += _view_EmployeeChecked;
+            View.CheckFormClick += _view_CheckFormClick;
+            View.ReportsClick += _view_ReportsClick;
+            View.SettingsClick += _view_SettingsClick;
+            View.OnFormShow += ViewOnFormShow;
+            View.OnFormClose += ViewOnFormClose;
         }
 
-        private void _view_FormClose(object sender, EventArgs e)
+        private void ViewOnFormClose(object sender, EventArgs e)
         {
-            if (_messageService.ShowQuestion("Close programm?") == true)
+            if (_messageService.ShowQuestion("Close program?"))
             {
                 _context.Dispose();
-                _view.CloseForm();
+                View.CloseForm();
             }
         }
 
-        private async void _view_FormShow(object sender, EventArgs e)
+        private void ViewOnFormShow(object sender, EventArgs e)
         {
 
         }
 
         private void _view_SettingsClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            SettingsFormShow?.Invoke(sender, EventArgs.Empty);
         }
 
         private void _view_ReportsClick(object sender, EventArgs e)
@@ -80,16 +75,22 @@ namespace CheckPoint.Presenter
 
         private void _view_EmployeeChecked(object sender, EventArgs e)
         {
-            if (_view.BarCode == string.Empty)
+            // TODO: Create separate class for this
+            if (!_context.IsConnected)
+            {
+                View.ProcessStatus = "Database not connected!";
                 return;
-            if (_context.Employees.Find(_view.BarCode) == null)
+            }
+            if (View.BarCode == string.Empty)
+                return;
+            if (_context.Employees.Find(View.BarCode) == null)
                 return;
 
-            if (_view.IsEntry)
+            if (View.IsEntry)
             {
                 ShiftCheck shift = new ShiftCheck()
                 {
-                    BarCode = _view.BarCode,
+                    BarCode = View.BarCode,
                     DateTimeEntry = DateTime.Now,
                 };
                 _shiftCheckRepo.Create(shift);
@@ -97,7 +98,7 @@ namespace CheckPoint.Presenter
             }
             else
             {
-                var shifts = _shiftCheckRepo.GetItems(s => s.BarCode == _view.BarCode);
+                var shifts = _shiftCheckRepo.GetItems(s => s.BarCode == View.BarCode);
                 var lastShift = shifts.OrderByDescending(s => s.DateTimeEntry).FirstOrDefault();
                 if (lastShift == null
                     || lastShift.DateTimeExit.HasValue
@@ -107,7 +108,7 @@ namespace CheckPoint.Presenter
                 {
                     ShiftCheck shift = new ShiftCheck()
                     {
-                        BarCode = _view.BarCode,
+                        BarCode = View.BarCode,
                         DateTimeExit = DateTime.Now,
                     };
                     _shiftCheckRepo.Create(shift);
@@ -124,12 +125,12 @@ namespace CheckPoint.Presenter
 
         private void ShowLastCheck(ShiftCheck shiftCheck)
         {
-            _view.FullName = shiftCheck.Employee.FullName;
-            _view.Post = shiftCheck.Employee.Post.Name;
-            _view.DateTimeEntry = shiftCheck.DateTimeEntry;
-            _view.DateTimeExit = shiftCheck.DateTimeExit;
-            _webCamera.SaveImageToFileAsync(shiftCheck.Employee.FullName + ".jpg");
-            _view.CheckPhoto = _webCamera.Snapshot;
+            View.FullName = shiftCheck.Employee.FullName;
+            View.Post = shiftCheck.Employee.Post.Name;
+            View.DateTimeEntry = shiftCheck.DateTimeEntry;
+            View.DateTimeExit = shiftCheck.DateTimeExit;
+            _webCamera.SaveImageToFile(Path.Combine(Properties.Settings.Default.CheckPhotoFolder, shiftCheck.Employee.FullName + ".jpg"));
+            View.CheckPhoto = _webCamera.Snapshot;
         }
     }
 }

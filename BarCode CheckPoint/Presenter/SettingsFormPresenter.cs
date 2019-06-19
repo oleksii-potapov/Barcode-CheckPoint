@@ -7,70 +7,90 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
+using DirectShowLib;
 
 namespace CheckPoint.Presenter
 {
     class SettingsFormPresenter
     {
-        private readonly ISettingsForm _view;
         private readonly IMessageService _messageService;
+        private SqlConnectionStringBuilder connectionStringBuilder;
 
-        public SettingsFormPresenter(ISettingsForm view, IMessageService messageService)
+        public ISettingsForm View { get; }
+
+        public SettingsFormPresenter(IMessageService messageService)
         {
-            _view = view;
+            View = new SettingsForm();
             _messageService = messageService;
 
-            _view.FormShow += _view_FormShow;
-            _view.ApplySettings += _view_ApplySettings;
+            View.OnFormShow += ViewOnFormShow;
+            View.ApplySettings += _view_ApplySettings;
         }
 
         private void _view_ApplySettings(object sender, EventArgs e)
         {
-            SqlConnectionStringBuilder stringBuilder =
-                new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["CheckPointDB"].ConnectionString)
-                {
-                    DataSource = _view.DataBaseServer,
-                    InitialCatalog = _view.DataBaseName
-                };
-            ConfigurationManager.ConnectionStrings["CheckPointCB"].ConnectionString = stringBuilder.ConnectionString;
-            Properties.Settings.Default.CameraIndex = _view.CameraIndex;
-            Properties.Settings.Default.CheckPhotoFolder = _view.CheckPhotoFolder;
-            Properties.Settings.Default.EmployeePhotoFolder = _view.EmployeePhotoFolder;
-            Properties.Settings.Default.PlotCode = _view.PlotCode;
-            Properties.Settings.Default.MaxShiftInHours = _view.MaxShiftInHours;
+            connectionStringBuilder.DataSource = View.DataBaseServer;
+            connectionStringBuilder.InitialCatalog = View.DataBaseName;
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+            connectionStringsSection.ConnectionStrings["CheckPointDB"].ConnectionString = connectionStringBuilder.ConnectionString;
+            config.Save();
+            ConfigurationManager.RefreshSection("connectionStrings");
+            Properties.Settings.Default.CameraIndex = View.CameraIndex;
+            Properties.Settings.Default.CheckPhotoFolder = View.CheckPhotoFolder;
+            Properties.Settings.Default.EmployeePhotoFolder = View.EmployeePhotoFolder;
+            Properties.Settings.Default.PlotCode = View.PlotCode;
+            Properties.Settings.Default.MaxShiftInHours = View.MaxShiftInHours;
+            Properties.Settings.Default.Save();
             _messageService.ShowWarning("Program must be reopen!");
+            View.CloseForm();
         }
 
-        private void _view_FormShow(object sender, EventArgs e)
+        private void ViewOnFormShow(object sender, EventArgs e)
         {
-            SqlConnectionStringBuilder stringBuilder =
+            connectionStringBuilder =
                 new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["CheckPointDB"].ConnectionString);
-            _view.DataBaseServer = stringBuilder.DataSource;
-            _view.DataBaseName = stringBuilder.InitialCatalog;
-            _view.CameraIndex = Properties.Settings.Default.CameraIndex;
-            _view.PlotCode = Properties.Settings.Default.PlotCode;
-            _view.MaxShiftInHours = Properties.Settings.Default.MaxShiftInHours;
+            View.DataBaseServer = connectionStringBuilder.DataSource;
+            View.DataBaseName = connectionStringBuilder.InitialCatalog;
+            View.CameraList = FillCameraList();
+            View.CameraIndex = Properties.Settings.Default.CameraIndex;
+            View.PlotCode = Properties.Settings.Default.PlotCode;
+            View.MaxShiftInHours = Properties.Settings.Default.MaxShiftInHours;
 
             var folder = Properties.Settings.Default.CheckPhotoFolder;
             if (folder != string.Empty)
-                _view.CheckPhotoFolder = folder;
+                View.CheckPhotoFolder = folder;
             else
             {
-                _view.CheckPhotoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CheckPhoto");
-                if (!Directory.Exists(_view.CheckPhotoFolder))
-                    Directory.CreateDirectory(_view.CheckPhotoFolder);
+                View.CheckPhotoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CheckPhoto");
+                if (!Directory.Exists(View.CheckPhotoFolder))
+                    Directory.CreateDirectory(View.CheckPhotoFolder);
             }
 
             folder = Properties.Settings.Default.EmployeePhotoFolder;
             if (folder != string.Empty)
-                _view.EmployeePhotoFolder = Properties.Settings.Default.EmployeePhotoFolder;
+                View.EmployeePhotoFolder = Properties.Settings.Default.EmployeePhotoFolder;
             else
             {
-                _view.EmployeePhotoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmployeePhoto");
-                if (!Directory.Exists(_view.EmployeePhotoFolder))
-                    Directory.CreateDirectory(_view.EmployeePhotoFolder);
+                View.EmployeePhotoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmployeePhoto");
+                if (!Directory.Exists(View.EmployeePhotoFolder))
+                    Directory.CreateDirectory(View.EmployeePhotoFolder);
             }
+        }
+
+        private IList<string> FillCameraList()
+        {
+            List<string> cameraList = new List<string>();
+            DsDevice[] devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+
+            foreach (var camera in devices)
+            {
+                cameraList.Add(camera.Name);
+            }
+
+            return cameraList;
         }
     }
 }

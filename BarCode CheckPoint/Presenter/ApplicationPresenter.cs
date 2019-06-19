@@ -23,8 +23,14 @@ namespace CheckPoint.Presenter
             _messageService = new MessageService();
             _context = new ApplicationContext();
             _mainFormPresenter = new MainFormPresenter(new MainForm(), _messageService, _context);
+            _mainFormPresenter.SettingsFormShow += _mainFormPresenter_SettingsFormShow;
         }
 
+        private void _mainFormPresenter_SettingsFormShow(object sender, EventArgs e)
+        {
+            SettingsFormPresenter settingsFormPresenter = new SettingsFormPresenter(_messageService);
+            settingsFormPresenter.View.ShowForm();
+        }
 
         public static ApplicationPresenter GetInstance()
         {
@@ -35,7 +41,12 @@ namespace CheckPoint.Presenter
 
         public IMainForm GetMainForm()
         {
-
+            Task checkDataBase = new Task(() =>
+            {
+                if (_context.Database.Exists())
+                    _context.IsConnected = true;
+            });
+            checkDataBase.Start();
             return _mainFormPresenter.View;
         }
     }
