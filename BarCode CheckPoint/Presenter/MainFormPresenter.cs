@@ -14,9 +14,6 @@ namespace CheckPoint.Presenter
     {
         private readonly IMessageService _messageService;
         private readonly ApplicationContext _context;
-        private readonly GenericRepository<Employee> _employeeRepo;
-        private readonly GenericRepository<Post> _postRepo;
-        private readonly GenericRepository<ShiftCheck> _shiftCheckRepo;
         private readonly WebCamera _webCamera;
         private readonly Timer _cameraTimer;
         public IMainForm View { get; }
@@ -28,13 +25,10 @@ namespace CheckPoint.Presenter
             View = mainForm;
             _messageService = messageService;
             _context = context;
-            _employeeRepo = new GenericRepository<Employee>(context);
-            _postRepo = new GenericRepository<Post>(context);
-            _shiftCheckRepo = new GenericRepository<ShiftCheck>(context);
             _webCamera = new WebCamera();
             // show web-camera image
             _cameraTimer = new Timer((obj) => View.Camera = _webCamera.GetImage(),
-                new AutoResetEvent(false), 500, 50);
+                null, 500, 50);
 
             View.EmployeeChecked += _view_EmployeeChecked;
             View.CheckFormClick += _view_CheckFormClick;
@@ -75,52 +69,12 @@ namespace CheckPoint.Presenter
 
         private void _view_EmployeeChecked(object sender, EventArgs e)
         {
-            // TODO: Create separate class for this
-            if (!_context.IsConnected)
-            {
-                View.ProcessStatus = "Database not connected!";
-                return;
-            }
             if (View.BarCode == string.Empty)
                 return;
-            if (_context.Employees.Find(View.BarCode) == null)
-                return;
 
-            if (View.IsEntry)
-            {
-                ShiftCheck shift = new ShiftCheck()
-                {
-                    BarCode = View.BarCode,
-                    DateTimeEntry = DateTime.Now,
-                };
-                _shiftCheckRepo.Create(shift);
-                ShowLastCheck(shift);
-            }
-            else
-            {
-                var shifts = _shiftCheckRepo.GetItems(s => s.BarCode == View.BarCode);
-                var lastShift = shifts.OrderByDescending(s => s.DateTimeEntry).FirstOrDefault();
-                if (lastShift == null
-                    || lastShift.DateTimeExit.HasValue
-                    || lastShift.DateTimeEntry.HasValue
-                    && DateTime.Now - lastShift.DateTimeEntry.Value >
-                    TimeSpan.FromHours(Properties.Settings.Default.MaxShiftInHours))
-                {
-                    ShiftCheck shift = new ShiftCheck()
-                    {
-                        BarCode = View.BarCode,
-                        DateTimeExit = DateTime.Now,
-                    };
-                    _shiftCheckRepo.Create(shift);
-                    ShowLastCheck(shift);
-                }
-                else
-                {
-                    lastShift.DateTimeExit = DateTime.Now;
-                    _shiftCheckRepo.Update(lastShift);
-                    ShowLastCheck(lastShift);
-                }
-            }
+            var employeeCheck = new EmployeeCheck(View.IsEntry, View.BarCode, _context);
+            var shiftCheck = employeeCheck.Check();
+            ShowLastCheck(shiftCheck);
         }
 
         private void ShowLastCheck(ShiftCheck shiftCheck)

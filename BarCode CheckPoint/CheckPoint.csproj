@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Model\ApplicationContext.cs" />
     <Compile Include="Model\CameraAndPhoto\WebCamera.cs" />
+    <Compile Include="Model\EmployeeCheck.cs" />
     <Compile Include="Model\Entities\Employee.cs" />
     <Compile Include="Model\Entities\Post.cs" />
     <Compile Include="Model\Entities\ShiftCheck.cs" />
