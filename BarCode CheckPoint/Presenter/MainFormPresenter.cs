@@ -14,7 +14,6 @@ namespace CheckPoint.Presenter
         private readonly IMessageService _messageService;
         private readonly ApplicationContext _context;
         private readonly WebCamera _webCamera;
-        private readonly Timer _cameraTimer;
         public IMainForm View { get; }
 
         public event EventHandler SettingsFormShow;
@@ -25,9 +24,8 @@ namespace CheckPoint.Presenter
             _messageService = messageService;
             _context = context;
             _webCamera = new WebCamera();
+            _webCamera.StartShowCameraImage();
             // show web-camera image
-            _cameraTimer = new Timer((obj) => View.Camera = _webCamera.GetImage(),
-                null, 500, 50);
 
             View.EmployeeChecked += _view_EmployeeChecked;
             View.CheckFormClick += _view_CheckFormClick;
@@ -35,6 +33,12 @@ namespace CheckPoint.Presenter
             View.SettingsClick += _view_SettingsClick;
             View.OnFormShow += ViewOnFormShow;
             View.OnFormClose += ViewOnFormClose;
+            _webCamera.CameraImageChanged += _webCamera_CameraImageChanged;
+        }
+
+        private void _webCamera_CameraImageChanged(object sender, EventImageArgs e)
+        {
+            View.Camera = e?.Image;
         }
 
         private void ViewOnFormClose(object sender, EventArgs e)
@@ -73,7 +77,10 @@ namespace CheckPoint.Presenter
 
             var employeeCheck = new EmployeeCheck(View.IsEntry, View.BarCode, _context);
             var shiftCheck = employeeCheck.Check();
-            ShowLastCheck(shiftCheck);
+            if (shiftCheck != null)
+                ShowLastCheck(shiftCheck);
+            else
+                View.ProcessStatus = "Employee check faulted.";
         }
 
         private void ShowLastCheck(ShiftCheck shiftCheck)

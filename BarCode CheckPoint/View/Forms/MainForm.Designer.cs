@@ -107,36 +107,32 @@
             this.labelFullName.AutoSize = true;
             this.labelFullName.Location = new System.Drawing.Point(230, 31);
             this.labelFullName.Name = "labelFullName";
-            this.labelFullName.Size = new System.Drawing.Size(45, 16);
+            this.labelFullName.Size = new System.Drawing.Size(0, 16);
             this.labelFullName.TabIndex = 4;
-            this.labelFullName.Text = "label1";
             // 
             // labelPost
             // 
             this.labelPost.AutoSize = true;
             this.labelPost.Location = new System.Drawing.Point(230, 54);
             this.labelPost.Name = "labelPost";
-            this.labelPost.Size = new System.Drawing.Size(45, 16);
+            this.labelPost.Size = new System.Drawing.Size(0, 16);
             this.labelPost.TabIndex = 5;
-            this.labelPost.Text = "label2";
             // 
             // labelDateTimeEntry
             // 
             this.labelDateTimeEntry.AutoSize = true;
             this.labelDateTimeEntry.Location = new System.Drawing.Point(230, 75);
             this.labelDateTimeEntry.Name = "labelDateTimeEntry";
-            this.labelDateTimeEntry.Size = new System.Drawing.Size(45, 16);
+            this.labelDateTimeEntry.Size = new System.Drawing.Size(0, 16);
             this.labelDateTimeEntry.TabIndex = 6;
-            this.labelDateTimeEntry.Text = "label3";
             // 
             // labelDateTimeExit
             // 
             this.labelDateTimeExit.AutoSize = true;
             this.labelDateTimeExit.Location = new System.Drawing.Point(230, 100);
             this.labelDateTimeExit.Name = "labelDateTimeExit";
-            this.labelDateTimeExit.Size = new System.Drawing.Size(45, 16);
+            this.labelDateTimeExit.Size = new System.Drawing.Size(0, 16);
             this.labelDateTimeExit.TabIndex = 7;
-            this.labelDateTimeExit.Text = "label4";
             // 
             // menuMainMenu
             // 
