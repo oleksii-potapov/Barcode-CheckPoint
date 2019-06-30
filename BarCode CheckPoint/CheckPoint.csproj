@@ -78,6 +78,7 @@
     <Compile Include="Model\Entities\ShiftCheck.cs" />
     <Compile Include="Presenter\ApplicationPresenter.cs" />
     <Compile Include="Presenter\MainFormPresenter.cs" />
+    <Compile Include="Presenter\PostListFormPresenter.cs" />
     <Compile Include="Presenter\SettingsFormPresenter.cs" />
     <Compile Include="View\Forms\EmployeeListForm.cs">
       <SubType>Form</SubType>
@@ -98,6 +99,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Interfaces\IEmployeeListForm.cs" />
+    <Compile Include="View\Interfaces\IForm.cs" />
     <Compile Include="View\Interfaces\IMainForm.cs" />
     <Compile Include="View\Interfaces\IMessageService.cs" />
     <Compile Include="View\Forms\MainForm.cs">

@@ -11,7 +11,7 @@ namespace CheckPoint.Model.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }
-        [ForeignKey("Post")] public int PostId { get; set; }
+        [ForeignKey("Post")] public int? PostId { get; set; }
         public virtual Post Post { get; set; }
 
         public string FullName => string.Format($"{FirstName} {LastName} {Patronymic}")

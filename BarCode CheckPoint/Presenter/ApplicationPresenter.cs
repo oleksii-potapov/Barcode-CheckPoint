@@ -24,6 +24,24 @@ namespace CheckPoint.Presenter
             _context = new ApplicationContext();
             _mainFormPresenter = new MainFormPresenter(new MainForm(), _messageService, _context);
             _mainFormPresenter.SettingsFormShow += _mainFormPresenter_SettingsFormShow;
+            _mainFormPresenter.PostListFormShow += _mainFormPresenter_PostListFormShow;
+            _mainFormPresenter.EmployeeListFormShow += _mainFormPresenter_EmployeeListFormShow;
+        }
+
+        private void _mainFormPresenter_EmployeeListFormShow(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _mainFormPresenter_PostListFormShow(object sender, EventArgs e)
+        {
+            if (!_context.IsConnected)
+            {
+                _messageService.ShowError("Database not connected");
+                return;
+            }
+            PostListFormPresenter postListFormPresenter = new PostListFormPresenter(_messageService, _context);
+            postListFormPresenter.View.ShowForm();
         }
 
         private void _mainFormPresenter_SettingsFormShow(object sender, EventArgs e)

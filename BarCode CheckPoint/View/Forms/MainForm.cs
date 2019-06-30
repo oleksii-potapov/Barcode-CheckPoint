@@ -117,6 +117,8 @@ namespace CheckPoint.View.Forms
         public event EventHandler CheckFormClick;
         public event EventHandler OnFormShow;
         public event EventHandler OnFormClose;
+        public event EventHandler EmployeesClick;
+        public event EventHandler PostsClick;
 
         #endregion
 
@@ -161,6 +163,16 @@ namespace CheckPoint.View.Forms
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutClick?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void EmployeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmployeesClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void PostsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PostsClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

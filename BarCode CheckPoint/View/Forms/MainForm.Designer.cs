@@ -47,6 +47,9 @@
             this.pictureCheckPhoto = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.listsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.postsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).BeginInit();
@@ -137,6 +140,7 @@
             // menuMainMenu
             // 
             this.menuMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listsToolStripMenuItem,
             this.serviceToolStripMenuItem,
             this.reportsToolStripMenuItem,
             this.helpToolStripMenuItem});
@@ -156,7 +160,7 @@
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.propertiesToolStripMenuItem.Text = "Settings";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -171,7 +175,7 @@
             // reportsFormToolStripMenuItem
             // 
             this.reportsFormToolStripMenuItem.Name = "reportsFormToolStripMenuItem";
-            this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reportsFormToolStripMenuItem.Text = "Reports form";
             this.reportsFormToolStripMenuItem.Click += new System.EventHandler(this.ReportsFormToolStripMenuItem_Click);
             // 
@@ -186,7 +190,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -224,6 +228,29 @@
             // 
             this.toolStripStatus.Name = "toolStripStatus";
             this.toolStripStatus.Size = new System.Drawing.Size(0, 17);
+            // 
+            // listsToolStripMenuItem
+            // 
+            this.listsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.employeesToolStripMenuItem,
+            this.postsToolStripMenuItem});
+            this.listsToolStripMenuItem.Name = "listsToolStripMenuItem";
+            this.listsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.listsToolStripMenuItem.Text = "Lists";
+            // 
+            // employeesToolStripMenuItem
+            // 
+            this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
+            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.employeesToolStripMenuItem.Text = "Employees";
+            this.employeesToolStripMenuItem.Click += new System.EventHandler(this.EmployeesToolStripMenuItem_Click);
+            // 
+            // postsToolStripMenuItem
+            // 
+            this.postsToolStripMenuItem.Name = "postsToolStripMenuItem";
+            this.postsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.postsToolStripMenuItem.Text = "Posts";
+            this.postsToolStripMenuItem.Click += new System.EventHandler(this.PostsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -281,6 +308,9 @@
         private System.Windows.Forms.PictureBox pictureCheckPhoto;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
+        private System.Windows.Forms.ToolStripMenuItem listsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem postsToolStripMenuItem;
     }
 }
 

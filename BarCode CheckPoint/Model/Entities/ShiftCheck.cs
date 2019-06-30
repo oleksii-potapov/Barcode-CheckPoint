@@ -7,7 +7,7 @@ namespace CheckPoint.Model.Entities
     public class ShiftCheck
     {
         public int ShiftCheckId { get; set; }
-        [ForeignKey("Employee")] [Required] public string BarCode { get; set; }
+        [ForeignKey("Employee")] public string BarCode { get; set; }
         public virtual Employee Employee { get; set; }
         public DateTime? DateTimeEntry { get; set; }
         public DateTime? DateTimeExit { get; set; }

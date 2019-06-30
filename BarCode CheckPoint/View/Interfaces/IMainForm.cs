@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace CheckPoint.View.Interfaces
 {
-    public interface IMainForm
+    public interface IMainForm : IForm
     {
         string BarCode { get; set; }
         string FullName { get; set; }
@@ -16,9 +16,6 @@ namespace CheckPoint.View.Interfaces
         Image EmployeePhoto { get; set; }
         string ProcessStatus { get; set; }
 
-        void CloseForm();
-        void ShowForm();
-
         event EventHandler EmployeeChecked;
         event EventHandler SettingsClick;
         event EventHandler ReportsClick;
@@ -26,5 +23,7 @@ namespace CheckPoint.View.Interfaces
         event EventHandler CheckFormClick;
         event EventHandler OnFormShow;
         event EventHandler OnFormClose;
+        event EventHandler EmployeesClick;
+        event EventHandler PostsClick;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CheckPoint.View.Interfaces
 {
-    public interface ISettingsForm
+    public interface ISettingsForm : IForm
     {
         string DataBaseServer { get; set; }
         string DataBaseName { get; set; }
@@ -17,8 +17,5 @@ namespace CheckPoint.View.Interfaces
 
         event EventHandler OnFormShow;
         event EventHandler ApplySettings;
-
-        void ShowForm();
-        void CloseForm();
     }
 }

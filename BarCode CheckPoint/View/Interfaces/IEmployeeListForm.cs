@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using CheckPoint.Model.Entities;
 
 namespace CheckPoint.View.Interfaces
 {
-    public interface IEmployeeListForm
+    public interface IEmployeeListForm : IForm
     {
-        List<Employee> Employees { get; set; }
+        BindingList<Employee> Employees { get; set; }
         Employee CurrentEmployee { get; }
         int SelectedEmployeeIndex { get; set; }
 
