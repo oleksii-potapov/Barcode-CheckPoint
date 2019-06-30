@@ -5,7 +5,6 @@ using System.Threading;
 using CheckPoint.Model;
 using CheckPoint.Model.CameraAndPhoto;
 using CheckPoint.Model.Entities;
-using CheckPoint.Model.Repository;
 using CheckPoint.View.Interfaces;
 
 namespace CheckPoint.Presenter
