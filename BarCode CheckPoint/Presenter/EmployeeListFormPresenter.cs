@@ -32,7 +32,8 @@ namespace CheckPoint.Presenter
 
         private void View_OnEditEmployee(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            EmployeeFormPresenter editEmployeeFormPresenter = new EmployeeFormPresenter(_messageService, _context, View.CurrentEmployee);
+            editEmployeeFormPresenter.View.ShowForm();
         }
 
         private void View_OnDeleteEmployee(object sender, EventArgs e)
@@ -60,7 +61,8 @@ namespace CheckPoint.Presenter
 
         private void View_OnAddEmployee(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            EmployeeFormPresenter addEmployeeFormPresenter = new EmployeeFormPresenter(_messageService, _context);
+            addEmployeeFormPresenter.View.ShowForm();
         }
     }
 }
