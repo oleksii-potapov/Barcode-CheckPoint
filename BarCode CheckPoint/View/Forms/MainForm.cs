@@ -110,15 +110,15 @@ namespace CheckPoint.View.Forms
             Show();
         }
 
-        public event EventHandler EmployeeChecked;
-        public event EventHandler SettingsClick;
-        public event EventHandler ReportsClick;
-        public event EventHandler AboutClick;
-        public event EventHandler CheckFormClick;
+        public event EventHandler OnEmployeeChecked;
+        public event EventHandler OnSettingsClick;
+        public event EventHandler OnReportsClick;
+        public event EventHandler OnAboutClick;
+        public event EventHandler OnCheckFormClick;
         public event EventHandler OnFormShow;
         public event EventHandler OnFormClose;
-        public event EventHandler EmployeesClick;
-        public event EventHandler PostsClick;
+        public event EventHandler OnEmployeesClick;
+        public event EventHandler OnPostsClick;
 
         #endregion
 
@@ -146,33 +146,33 @@ namespace CheckPoint.View.Forms
         {
             if (e.KeyCode == Keys.Return)
             {
-                EmployeeChecked?.Invoke(sender, EventArgs.Empty);
+                OnEmployeeChecked?.Invoke(sender, EventArgs.Empty);
             }
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SettingsClick?.Invoke(sender, EventArgs.Empty);
+            OnSettingsClick?.Invoke(sender, EventArgs.Empty);
         }
 
         private void ReportsFormToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReportsClick?.Invoke(sender, EventArgs.Empty);
+            OnReportsClick?.Invoke(sender, EventArgs.Empty);
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutClick?.Invoke(sender, EventArgs.Empty);
+            OnAboutClick?.Invoke(sender, EventArgs.Empty);
         }
 
         private void EmployeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EmployeesClick?.Invoke(this, EventArgs.Empty);
+            OnEmployeesClick?.Invoke(this, EventArgs.Empty);
         }
 
         private void PostsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PostsClick?.Invoke(this, EventArgs.Empty);
+            OnPostsClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

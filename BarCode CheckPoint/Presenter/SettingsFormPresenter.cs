@@ -26,7 +26,7 @@ namespace CheckPoint.Presenter
             _messageService = messageService;
 
             View.OnFormShow += ViewOnFormShow;
-            View.ApplySettings += _view_ApplySettings;
+            View.OnApplySettings += _view_ApplySettings;
         }
 
         private void _view_ApplySettings(object sender, EventArgs e)

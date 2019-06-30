@@ -16,6 +16,6 @@ namespace CheckPoint.View.Interfaces
         IList<string> CameraList { get; set; }
 
         event EventHandler OnFormShow;
-        event EventHandler ApplySettings;
+        event EventHandler OnApplySettings;
     }
 }

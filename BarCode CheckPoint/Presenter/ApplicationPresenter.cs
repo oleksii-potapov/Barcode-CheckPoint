@@ -30,7 +30,14 @@ namespace CheckPoint.Presenter
 
         private void _mainFormPresenter_EmployeeListFormShow(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (!_context.IsConnected)
+            {
+                _messageService.ShowError("Database not connected");
+                return;
+            }
+
+            EmployeeListFormPresenter employeeListFormPresenter = new EmployeeListFormPresenter(_messageService, _context);
+            employeeListFormPresenter.View.ShowForm();
         }
 
         private void _mainFormPresenter_PostListFormShow(object sender, EventArgs e)

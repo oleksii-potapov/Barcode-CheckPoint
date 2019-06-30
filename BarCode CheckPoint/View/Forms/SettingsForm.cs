@@ -69,7 +69,7 @@ namespace CheckPoint.View.Forms
         #region Events
 
         public event EventHandler OnFormShow;
-        public event EventHandler ApplySettings;
+        public event EventHandler OnApplySettings;
         public void ShowForm()
         {
             Show();
@@ -87,7 +87,7 @@ namespace CheckPoint.View.Forms
 
         private void ButtonApplySettings_Click(object sender, EventArgs e)
         {
-            ApplySettings?.Invoke(sender, EventArgs.Empty);
+            OnApplySettings?.Invoke(sender, EventArgs.Empty);
         }
 
         #endregion

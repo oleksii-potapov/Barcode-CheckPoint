@@ -16,14 +16,14 @@ namespace CheckPoint.View.Interfaces
         Image EmployeePhoto { get; set; }
         string ProcessStatus { get; set; }
 
-        event EventHandler EmployeeChecked;
-        event EventHandler SettingsClick;
-        event EventHandler ReportsClick;
-        event EventHandler AboutClick;
-        event EventHandler CheckFormClick;
+        event EventHandler OnEmployeeChecked;
+        event EventHandler OnSettingsClick;
+        event EventHandler OnReportsClick;
+        event EventHandler OnAboutClick;
+        event EventHandler OnCheckFormClick;
         event EventHandler OnFormShow;
         event EventHandler OnFormClose;
-        event EventHandler EmployeesClick;
-        event EventHandler PostsClick;
+        event EventHandler OnEmployeesClick;
+        event EventHandler OnPostsClick;
     }
 }

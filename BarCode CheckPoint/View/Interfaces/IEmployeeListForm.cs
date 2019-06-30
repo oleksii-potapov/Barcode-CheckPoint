@@ -8,13 +8,12 @@ namespace CheckPoint.View.Interfaces
     public interface IEmployeeListForm : IForm
     {
         BindingList<Employee> Employees { get; set; }
-        Employee CurrentEmployee { get; }
+        Employee CurrentEmployee { get; set; }
         int SelectedEmployeeIndex { get; set; }
 
         event EventHandler OnAddEmployee;
         event EventHandler OnDeleteEmployee;
         event EventHandler OnEditEmployee;
-        event EventHandler OnPostFormShow;
         event EventHandler OnCurrentEmployeeChanged;
     }
 }

@@ -22,10 +22,9 @@ namespace CheckPoint.Presenter
         {
             _messageService = messageService;
             _context = context;
-            View = new PostListForm();
-            View.Posts = _context.Posts.ToList();
+            _context.Posts.Load();
+            View = new PostListForm {Posts = _context.Posts.Local.ToBindingList()};
 
-            View.OnFormShow += View_OnFormShow;
             View.OnAddPost += View_OnAddPost;
             View.OnDeletePost += View_OnDeletePost;
             View.OnEditPost += View_OnEditPost;
@@ -39,11 +38,17 @@ namespace CheckPoint.Presenter
         private void View_OnDeletePost(object sender, EventArgs e)
         {
             var postToDelete = _context.Posts.Find(View.CurrentPost.PostId);
+            if (postToDelete == null) return;
+            if (_context.Employees.FirstOrDefault(emp => emp.PostId == View.CurrentPost.PostId) != null)
+            {
+                _messageService.ShowError("There are records in Employee table with this post." +
+                                          Environment.NewLine + "Deletion of this record is impossible.");
+                return;
+            }
             try
             {
-                _context.Posts.Remove(postToDelete ?? throw new InvalidOperationException());
+                _context.Posts.Remove(postToDelete);
                 _context.SaveChanges();
-                View.Posts = _context.Posts.ToList();
             }
             catch (DbUpdateException exception)
             {
@@ -59,11 +64,7 @@ namespace CheckPoint.Presenter
             var postToAdd = new Post() {Name = View.PostToAdd};
             _context.Posts.Add(postToAdd);
             _context.SaveChanges();
-            View.Posts = _context.Posts.ToList();
         }
 
-        private void View_OnFormShow(object sender, EventArgs e)
-        {
-        }
     }
 }

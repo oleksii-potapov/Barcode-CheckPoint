@@ -10,7 +10,7 @@ namespace CheckPoint.View.Interfaces
 {
     public interface IPostListForm : IForm
     {
-        List<Post> Posts { get; set; }
+        BindingList<Post> Posts { get; set; }
         Post CurrentPost { get; }
         int SelectedPostIndex { get; set; }
         string PostToAdd { get; set; }
@@ -18,7 +18,5 @@ namespace CheckPoint.View.Interfaces
         event EventHandler OnAddPost;
         event EventHandler OnEditPost;
         event EventHandler OnDeletePost;
-        event EventHandler OnCurrentPostChanged;
-        event EventHandler OnFormShow;
     }
 }

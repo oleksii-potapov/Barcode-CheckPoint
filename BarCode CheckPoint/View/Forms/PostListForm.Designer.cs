@@ -53,7 +53,7 @@
             this.gridPost.Location = new System.Drawing.Point(12, 12);
             this.gridPost.MultiSelect = false;
             this.gridPost.Name = "gridPost";
-            this.gridPost.Size = new System.Drawing.Size(466, 329);
+            this.gridPost.Size = new System.Drawing.Size(467, 248);
             this.gridPost.TabIndex = 0;
             // 
             // PostName
@@ -72,7 +72,8 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(12, 395);
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAdd.Location = new System.Drawing.Point(12, 314);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(148, 42);
             this.buttonAdd.TabIndex = 1;
@@ -82,7 +83,8 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(330, 347);
+            this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEdit.Location = new System.Drawing.Point(331, 266);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(148, 42);
             this.buttonEdit.TabIndex = 2;
@@ -92,7 +94,8 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(330, 395);
+            this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDelete.Location = new System.Drawing.Point(331, 314);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(148, 42);
             this.buttonDelete.TabIndex = 3;
@@ -102,15 +105,17 @@
             // 
             // textPostToAdd
             // 
-            this.textPostToAdd.Location = new System.Drawing.Point(12, 369);
+            this.textPostToAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textPostToAdd.Location = new System.Drawing.Point(12, 288);
             this.textPostToAdd.Name = "textPostToAdd";
             this.textPostToAdd.Size = new System.Drawing.Size(286, 20);
             this.textPostToAdd.TabIndex = 4;
             // 
             // labelAddPost
             // 
+            this.labelAddPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelAddPost.AutoSize = true;
-            this.labelAddPost.Location = new System.Drawing.Point(12, 353);
+            this.labelAddPost.Location = new System.Drawing.Point(12, 272);
             this.labelAddPost.Name = "labelAddPost";
             this.labelAddPost.Size = new System.Drawing.Size(61, 13);
             this.labelAddPost.TabIndex = 5;
@@ -120,13 +125,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 449);
+            this.ClientSize = new System.Drawing.Size(492, 368);
             this.Controls.Add(this.labelAddPost);
             this.Controls.Add(this.textPostToAdd);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.gridPost);
+            this.MinimumSize = new System.Drawing.Size(508, 406);
             this.Name = "PostListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PostListForm";

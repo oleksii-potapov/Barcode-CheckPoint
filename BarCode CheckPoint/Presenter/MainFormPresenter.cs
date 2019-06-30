@@ -29,14 +29,14 @@ namespace CheckPoint.Presenter
             _webCamera.StartShowCameraImage();
             // show web-camera image
 
-            View.EmployeeChecked += View_EmployeeChecked;
-            View.CheckFormClick += View_CheckFormClick;
-            View.ReportsClick += View_ReportsClick;
-            View.SettingsClick += View_SettingsClick;
+            View.OnEmployeeChecked += ViewOnEmployeeChecked;
+            View.OnCheckFormClick += View_CheckFormClick;
+            View.OnReportsClick += ViewOnReportsClick;
+            View.OnSettingsClick += ViewOnSettingsClick;
             View.OnFormShow += ViewOnFormShow;
             View.OnFormClose += ViewOnFormClose;
-            View.EmployeesClick += View_EmployeesClick;
-            View.PostsClick += View_PostsClick;
+            View.OnEmployeesClick += View_EmployeesClick;
+            View.OnPostsClick += View_PostsClick;
             _webCamera.CameraImageChanged += _webCamera_CameraImageChanged;
         }
 
@@ -44,10 +44,13 @@ namespace CheckPoint.Presenter
         {
             PostListFormShow?.Invoke(this, EventArgs.Empty);
         }
-
         private void View_EmployeesClick(object sender, EventArgs e)
         {
-            
+            EmployeeListFormShow?.Invoke(this, EventArgs.Empty);
+        }
+        private void ViewOnSettingsClick(object sender, EventArgs e)
+        {
+            SettingsFormShow?.Invoke(sender, EventArgs.Empty);
         }
 
         private void _webCamera_CameraImageChanged(object sender, EventImageArgs e)
@@ -69,12 +72,7 @@ namespace CheckPoint.Presenter
 
         }
 
-        private void View_SettingsClick(object sender, EventArgs e)
-        {
-            SettingsFormShow?.Invoke(sender, EventArgs.Empty);
-        }
-
-        private void View_ReportsClick(object sender, EventArgs e)
+        private void ViewOnReportsClick(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
@@ -84,7 +82,7 @@ namespace CheckPoint.Presenter
             throw new NotImplementedException();
         }
 
-        private void View_EmployeeChecked(object sender, EventArgs e)
+        private void ViewOnEmployeeChecked(object sender, EventArgs e)
         {
             if (View.BarCode == string.Empty)
                 return;
