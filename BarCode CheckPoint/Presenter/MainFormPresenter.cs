@@ -42,6 +42,8 @@ namespace CheckPoint.Presenter
             _webCamera.CameraImageChanged += _webCamera_CameraImageChanged;
         }
 
+        #region Events of form showing forwarding
+
         private void View_PostsClick(object sender, EventArgs e)
         {
             PostListFormShow?.Invoke(this, EventArgs.Empty);
@@ -54,6 +56,16 @@ namespace CheckPoint.Presenter
         {
             SettingsFormShow?.Invoke(sender, EventArgs.Empty);
         }
+        private void ViewOnReportsClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void View_CheckFormClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         private void _webCamera_CameraImageChanged(object sender, EventImageArgs e)
         {
@@ -74,15 +86,7 @@ namespace CheckPoint.Presenter
 
         }
 
-        private void ViewOnReportsClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
-        private void View_CheckFormClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         private void ViewOnEmployeeChecked(object sender, EventArgs e)
         {
@@ -119,8 +123,11 @@ namespace CheckPoint.Presenter
                 $"{DateTime.Now:dd.MM.yyyy}");
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            _webCamera.SaveImageToFile(Path.Combine(path,
-                string.Format($"{shiftCheck.Employee.FullName}_{shiftCheck.ShiftCheckId}_{way}.jpg")));
+            path = Path.Combine(path, string.Format($"{shiftCheck.Employee.FullName}_{shiftCheck.ShiftCheckId}_{way}.jpg"));
+            if (View.IsEntry)
+                _webCamera.SaveImageToFile(path, $"Entry - {DateTime.Now:dd.MM.yyyy HH:mm:ss}", Color.LimeGreen);
+            else
+                _webCamera.SaveImageToFile(path, $"Exit - {DateTime.Now:dd.MM.yyyy HH:mm:ss}", Color.Blue);
         }
     }
 }

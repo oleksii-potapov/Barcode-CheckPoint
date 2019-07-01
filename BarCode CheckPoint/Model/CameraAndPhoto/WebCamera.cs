@@ -15,7 +15,7 @@ namespace CheckPoint.Model.CameraAndPhoto
     {
         private readonly VideoCapture _capture;
         private readonly Mat _mat;
-        private Bitmap _snapshot;
+        private Image _snapshot;
         private Image _cameraImage;
         private Timer _cameraTimer;
         public event EventHandler<EventImageArgs> CameraImageChanged;
@@ -26,7 +26,7 @@ namespace CheckPoint.Model.CameraAndPhoto
             _mat = new Mat();
         }
 
-        public Bitmap Snapshot => _snapshot;
+        public Image Snapshot => _snapshot;
 
         public Bitmap GetImage()
         {
@@ -34,16 +34,29 @@ namespace CheckPoint.Model.CameraAndPhoto
             return _mat.Bitmap;
         }
 
-        public void SaveImageToFile(string imagePath)
+        public void SaveImageToFile(string imagePath, string textOnImage = default, Color colorOfTextBackground = default)
         {
             _snapshot = _mat.Bitmap;
-            _mat?.Bitmap.Save(imagePath);
+            if (textOnImage != default)
+                PutTextOnSnapshot(textOnImage, colorOfTextBackground);
+            _snapshot.Save(imagePath);
         }
 
-        public async void SaveImageToFileAsync(string imagePath)
+        private void PutTextOnSnapshot(string textOnImage, Color colorOfTextBackground)
         {
-            _snapshot = _mat.Bitmap;
-            await Task.Run(() => _mat?.Bitmap.Save(imagePath));
+            using (Graphics g = Graphics.FromImage(_snapshot))
+            {
+                Rectangle rectangleText = new Rectangle(0, 0, _snapshot.Width, 30);
+                using (SolidBrush brush = new SolidBrush(colorOfTextBackground),
+                                    textBrush = new SolidBrush(Color.Black))
+                {
+                    g.FillRectangle(brush, rectangleText);
+                    using (Font font = new Font(FontFamily.GenericSerif, 20))
+                    {
+                        g.DrawString(textOnImage, font, textBrush, rectangleText);
+                    }
+                }
+            }
         }
 
         public void StartShowCameraImage()
