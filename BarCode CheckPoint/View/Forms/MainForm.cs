@@ -77,24 +77,22 @@ namespace CheckPoint.View.Forms
 
         public Image Camera
         {
-            get
-            {
-                var picture = pictureCamera.Image;
-                return picture;
-            }
+            get => pictureCamera.Image;
             set => pictureCamera.Image = value;
         }
 
         public Image CheckPhoto
         {
-            get
-            {
-                var picture = pictureCheckPhoto.Image;
-                return picture;
-            }
+            get => pictureCheckPhoto.Image;
             set => pictureCheckPhoto.Image = value;
         }
-        public Image EmployeePhoto { get; set; }
+
+        public Image EmployeePhoto
+        {
+            get => pictureEmployeePhoto.Image;
+            set => pictureEmployeePhoto.Image = value;
+        }
+
         public string ProcessStatus
         {
             get => toolStripStatus.Text;

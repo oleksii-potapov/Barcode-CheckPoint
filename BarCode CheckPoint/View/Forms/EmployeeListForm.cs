@@ -21,6 +21,7 @@ namespace CheckPoint.View.Forms
             buttonDelete.Click += ButtonDelete_Click;
             buttonEdit.Click += ButtonEdit_Click;
             gridEmployee.SelectionChanged += GridEmployee_SelectionChanged;
+            gridEmployee.CellDoubleClick += ButtonEdit_Click;
         }
 
         #region forwarding events

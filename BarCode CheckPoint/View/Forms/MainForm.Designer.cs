@@ -37,6 +37,9 @@
             this.labelDateTimeEntry = new System.Windows.Forms.Label();
             this.labelDateTimeExit = new System.Windows.Forms.Label();
             this.menuMainMenu = new System.Windows.Forms.MenuStrip();
+            this.listsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.postsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,23 +50,23 @@
             this.pictureCheckPhoto = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.listsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.postsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureEmployeePhoto = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.menuMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCheckPhoto)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEmployeePhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // textBarCode
             // 
-            this.textBarCode.Location = new System.Drawing.Point(13, 28);
+            this.textBarCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBarCode.Location = new System.Drawing.Point(13, 112);
             this.textBarCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBarCode.Name = "textBarCode";
             this.textBarCode.PasswordChar = '*';
-            this.textBarCode.Size = new System.Drawing.Size(191, 22);
+            this.textBarCode.Size = new System.Drawing.Size(191, 26);
             this.textBarCode.TabIndex = 0;
             this.textBarCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBarCode_KeyUp);
             // 
@@ -71,7 +74,7 @@
             // 
             this.groupBox1.Controls.Add(this.radioExit);
             this.groupBox1.Controls.Add(this.radioEntry);
-            this.groupBox1.Location = new System.Drawing.Point(13, 54);
+            this.groupBox1.Location = new System.Drawing.Point(13, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(191, 78);
             this.groupBox1.TabIndex = 3;
@@ -146,8 +149,31 @@
             this.helpToolStripMenuItem});
             this.menuMainMenu.Location = new System.Drawing.Point(0, 0);
             this.menuMainMenu.Name = "menuMainMenu";
-            this.menuMainMenu.Size = new System.Drawing.Size(606, 24);
+            this.menuMainMenu.Size = new System.Drawing.Size(599, 24);
             this.menuMainMenu.TabIndex = 8;
+            // 
+            // listsToolStripMenuItem
+            // 
+            this.listsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.employeesToolStripMenuItem,
+            this.postsToolStripMenuItem});
+            this.listsToolStripMenuItem.Name = "listsToolStripMenuItem";
+            this.listsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.listsToolStripMenuItem.Text = "Lists";
+            // 
+            // employeesToolStripMenuItem
+            // 
+            this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
+            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.employeesToolStripMenuItem.Text = "Employees";
+            this.employeesToolStripMenuItem.Click += new System.EventHandler(this.EmployeesToolStripMenuItem_Click);
+            // 
+            // postsToolStripMenuItem
+            // 
+            this.postsToolStripMenuItem.Name = "postsToolStripMenuItem";
+            this.postsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.postsToolStripMenuItem.Text = "Posts";
+            this.postsToolStripMenuItem.Click += new System.EventHandler(this.PostsToolStripMenuItem_Click);
             // 
             // serviceToolStripMenuItem
             // 
@@ -160,7 +186,7 @@
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.propertiesToolStripMenuItem.Text = "Settings";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -175,7 +201,7 @@
             // reportsFormToolStripMenuItem
             // 
             this.reportsFormToolStripMenuItem.Name = "reportsFormToolStripMenuItem";
-            this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reportsFormToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.reportsFormToolStripMenuItem.Text = "Reports form";
             this.reportsFormToolStripMenuItem.Click += new System.EventHandler(this.ReportsFormToolStripMenuItem_Click);
             // 
@@ -190,14 +216,14 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // pictureCamera
             // 
             this.pictureCamera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureCamera.Location = new System.Drawing.Point(12, 160);
+            this.pictureCamera.Location = new System.Drawing.Point(12, 193);
             this.pictureCamera.Name = "pictureCamera";
             this.pictureCamera.Size = new System.Drawing.Size(245, 202);
             this.pictureCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -207,7 +233,7 @@
             // pictureCheckPhoto
             // 
             this.pictureCheckPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureCheckPhoto.Location = new System.Drawing.Point(305, 160);
+            this.pictureCheckPhoto.Location = new System.Drawing.Point(342, 193);
             this.pictureCheckPhoto.Name = "pictureCheckPhoto";
             this.pictureCheckPhoto.Size = new System.Drawing.Size(245, 202);
             this.pictureCheckPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -218,9 +244,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 394);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 411);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(606, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(599, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -229,34 +255,21 @@
             this.toolStripStatus.Name = "toolStripStatus";
             this.toolStripStatus.Size = new System.Drawing.Size(0, 17);
             // 
-            // listsToolStripMenuItem
+            // pictureEmployeePhoto
             // 
-            this.listsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.employeesToolStripMenuItem,
-            this.postsToolStripMenuItem});
-            this.listsToolStripMenuItem.Name = "listsToolStripMenuItem";
-            this.listsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.listsToolStripMenuItem.Text = "Lists";
-            // 
-            // employeesToolStripMenuItem
-            // 
-            this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
-            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.employeesToolStripMenuItem.Text = "Employees";
-            this.employeesToolStripMenuItem.Click += new System.EventHandler(this.EmployeesToolStripMenuItem_Click);
-            // 
-            // postsToolStripMenuItem
-            // 
-            this.postsToolStripMenuItem.Name = "postsToolStripMenuItem";
-            this.postsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.postsToolStripMenuItem.Text = "Posts";
-            this.postsToolStripMenuItem.Click += new System.EventHandler(this.PostsToolStripMenuItem_Click);
+            this.pictureEmployeePhoto.Location = new System.Drawing.Point(455, 31);
+            this.pictureEmployeePhoto.Name = "pictureEmployeePhoto";
+            this.pictureEmployeePhoto.Size = new System.Drawing.Size(132, 156);
+            this.pictureEmployeePhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureEmployeePhoto.TabIndex = 12;
+            this.pictureEmployeePhoto.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 416);
+            this.ClientSize = new System.Drawing.Size(599, 433);
+            this.Controls.Add(this.pictureEmployeePhoto);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pictureCheckPhoto);
             this.Controls.Add(this.pictureCamera);
@@ -282,6 +295,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureCheckPhoto)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEmployeePhoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,6 +325,7 @@
         private System.Windows.Forms.ToolStripMenuItem listsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem postsToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureEmployeePhoto;
     }
 }
 

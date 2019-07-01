@@ -55,21 +55,12 @@ namespace CheckPoint.Presenter
                 return;
             }
 
-
-            if (_isNewRecord)
-                _currentEmployee = new Employee();
-            _currentEmployee.BarCode = View.BarCode;
-            _currentEmployee.FirstName = View.FirstName;
-            _currentEmployee.LastName = View.LastName;
-            _currentEmployee.Patronymic = View.Patronymic;
-            _currentEmployee.PostId = View.PostId;
-            if (_isNewRecord)
-                _context.Employees.Add(_currentEmployee);
+            if(_isNewRecord)
+                AddRecord();
             else
-                _context.Entry(_currentEmployee).State = EntityState.Modified;
-            _context.SaveChanges();
-            if (View.EmployeePhoto != null)
-                View.EmployeePhoto.Save(Path.Combine(Properties.Settings.Default.EmployeePhotoFolder, string.Format($"{_currentEmployee.BarCode}-{_currentEmployee.FullName}.jpg")));
+                EditRecord();
+
+            View.EmployeePhoto?.Save(Path.Combine(Properties.Settings.Default.EmployeePhotoFolder, string.Format($"{_currentEmployee.FullName}-{_currentEmployee.BarCode}.jpg")));
             View.CloseForm();
         }
 
@@ -88,9 +79,32 @@ namespace CheckPoint.Presenter
             if (_currentEmployee.PostId != null)
                 View.PostId = _currentEmployee.PostId.Value;
             var photoPath = Path.Combine(Properties.Settings.Default.EmployeePhotoFolder,
-                string.Format($"{_currentEmployee.BarCode}-{_currentEmployee.FullName}.jpg"));
+                string.Format($"{_currentEmployee.FullName}-{_currentEmployee.BarCode}.jpg"));
             if (File.Exists(photoPath))
                 View.EmployeePhoto = Image.FromFile(photoPath);
+        }
+
+        private void AddRecord()
+        {
+            _currentEmployee = new Employee();
+            _currentEmployee.BarCode = View.BarCode;
+            _currentEmployee.FirstName = View.FirstName;
+            _currentEmployee.LastName = View.LastName;
+            _currentEmployee.Patronymic = View.Patronymic;
+            _currentEmployee.PostId = View.PostId;
+            _context.Employees.Add(_currentEmployee);
+            _context.SaveChanges();
+        }
+
+        private void EditRecord()
+        {
+            _currentEmployee.BarCode = View.BarCode;
+            _currentEmployee.FirstName = View.FirstName;
+            _currentEmployee.LastName = View.LastName;
+            _currentEmployee.Patronymic = View.Patronymic;
+            _currentEmployee.PostId = View.PostId;
+            _context.Entry(_currentEmployee).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

@@ -66,10 +66,14 @@ namespace CheckPoint.Presenter
 
         public IMainForm GetMainForm()
         {
+            _mainFormPresenter.View.ProcessStatus = "DataBase connecting...";
             Task checkDataBase = new Task(() =>
             {
                 if (_context.Database.Exists())
+                {
                     _context.IsConnected = true;
+                    _mainFormPresenter.View.ProcessStatus = "DataBase connected.";
+                }
             });
             checkDataBase.Start();
             return _mainFormPresenter.View;

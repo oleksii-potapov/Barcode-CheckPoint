@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using CheckPoint.Model;
 using CheckPoint.Model.CameraAndPhoto;
 using CheckPoint.Model.Entities;
@@ -88,6 +90,7 @@ namespace CheckPoint.Presenter
                 return;
 
             var employeeCheck = new EmployeeCheck(View.IsEntry, View.BarCode, _context);
+            
             var shiftCheck = employeeCheck.Check();
             if (shiftCheck != null)
             {
@@ -105,6 +108,8 @@ namespace CheckPoint.Presenter
             View.DateTimeEntry = shiftCheck.DateTimeEntry;
             View.DateTimeExit = shiftCheck.DateTimeExit;
             View.CheckPhoto = _webCamera.Snapshot;
+            View.EmployeePhoto = Image.FromFile(Path.Combine(Properties.Settings.Default.EmployeePhotoFolder,
+                string.Format($"{shiftCheck.Employee.FullName}-{shiftCheck.Employee.BarCode}.jpg")));
         }
 
         private void SaveCheckPhoto(ShiftCheck shiftCheck)
