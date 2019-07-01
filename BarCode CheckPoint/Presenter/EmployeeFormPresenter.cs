@@ -17,7 +17,7 @@ namespace CheckPoint.Presenter
     {
         private readonly ApplicationContext _context;
         private readonly IMessageService _messageService;
-        private readonly Employee _currentEmployee;
+        private Employee _currentEmployee;
         private readonly bool _isNewRecord;
         public IEmployeeForm View { get; }
 
@@ -55,6 +55,9 @@ namespace CheckPoint.Presenter
                 return;
             }
 
+
+            if (_isNewRecord)
+                _currentEmployee = new Employee();
             _currentEmployee.BarCode = View.BarCode;
             _currentEmployee.FirstName = View.FirstName;
             _currentEmployee.LastName = View.LastName;
@@ -73,10 +76,10 @@ namespace CheckPoint.Presenter
         private void View_OnFormShow(object sender, EventArgs e)
         {
             if (!_isNewRecord)
-                FillTextInFields();
+                FillData();
         }
 
-        private void FillTextInFields()
+        private void FillData()
         {
             View.BarCode = _currentEmployee.BarCode;
             View.FirstName = _currentEmployee.FirstName;

@@ -14,7 +14,7 @@ namespace CheckPoint.Model.Entities
         [ForeignKey("Post")] public int? PostId { get; set; }
         public virtual Post Post { get; set; }
 
-        public string FullName => string.Format($"{FirstName} {LastName} {Patronymic}")
+        public string FullName => string.Format($"{LastName} {FirstName} {Patronymic}")
                                         .Trim();
 
         public override string ToString() => FullName;

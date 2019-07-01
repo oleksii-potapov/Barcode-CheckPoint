@@ -90,7 +90,10 @@ namespace CheckPoint.Presenter
             var employeeCheck = new EmployeeCheck(View.IsEntry, View.BarCode, _context);
             var shiftCheck = employeeCheck.Check();
             if (shiftCheck != null)
+            {
+                SaveCheckPhoto(shiftCheck);
                 ShowLastCheck(shiftCheck);
+            }
             else
                 View.ProcessStatus = "Employee check faulted.";
         }
@@ -101,8 +104,18 @@ namespace CheckPoint.Presenter
             View.Post = shiftCheck.Employee.Post.Name;
             View.DateTimeEntry = shiftCheck.DateTimeEntry;
             View.DateTimeExit = shiftCheck.DateTimeExit;
-            _webCamera.SaveImageToFile(Path.Combine(Properties.Settings.Default.CheckPhotoFolder, shiftCheck.Employee.FullName + ".jpg"));
             View.CheckPhoto = _webCamera.Snapshot;
+        }
+
+        private void SaveCheckPhoto(ShiftCheck shiftCheck)
+        {
+            var way = View.IsEntry ? 1 : 2;
+            var path = Path.Combine(Properties.Settings.Default.CheckPhotoFolder,
+                $"{DateTime.Now:dd.MM.yyyy}");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            _webCamera.SaveImageToFile(Path.Combine(path,
+                string.Format($"{shiftCheck.Employee.FullName}_{shiftCheck.ShiftCheckId}_{way}.jpg")));
         }
     }
 }
