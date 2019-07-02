@@ -19,7 +19,7 @@ namespace CheckPoint.Presenter
         public EmployeeListFormPresenter(IMessageService messageService, ApplicationContext context)
         {
             _context = context;
-            _context.Employees.Load();
+            _context.Employees.Include(emp => emp.Post).Load();
             _messageService = messageService;
 
             View = new EmployeeListForm() {Employees = _context.Employees.Local.ToBindingList()};

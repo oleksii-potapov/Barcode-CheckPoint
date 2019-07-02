@@ -62,10 +62,10 @@
             // textBarCode
             // 
             this.textBarCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBarCode.Location = new System.Drawing.Point(13, 112);
+            this.textBarCode.Location = new System.Drawing.Point(12, 112);
             this.textBarCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBarCode.Name = "textBarCode";
-            this.textBarCode.PasswordChar = '*';
+            this.textBarCode.PasswordChar = '•';
             this.textBarCode.Size = new System.Drawing.Size(191, 26);
             this.textBarCode.TabIndex = 0;
             this.textBarCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBarCode_KeyUp);
@@ -83,6 +83,7 @@
             // radioExit
             // 
             this.radioExit.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioExit.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioExit.Location = new System.Drawing.Point(111, 21);
@@ -97,6 +98,7 @@
             // 
             this.radioEntry.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioEntry.Checked = true;
+            this.radioEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioEntry.ForeColor = System.Drawing.Color.DarkGreen;
             this.radioEntry.Location = new System.Drawing.Point(21, 21);

@@ -103,6 +103,8 @@ namespace CheckPoint.Presenter
             }
             else
                 View.ProcessStatus = "Employee check faulted.";
+
+            View.BarCode = string.Empty;
         }
 
         private void ShowLastCheck(ShiftCheck shiftCheck)

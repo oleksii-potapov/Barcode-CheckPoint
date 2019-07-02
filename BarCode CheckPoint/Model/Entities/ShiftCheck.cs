@@ -8,7 +8,7 @@ namespace CheckPoint.Model.Entities
     {
         public int ShiftCheckId { get; set; }
         [ForeignKey("Employee")] public string BarCode { get; set; }
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         public DateTime? DateTimeEntry { get; set; }
         public DateTime? DateTimeExit { get; set; }
         public bool WrongCheck { get; set; } = false;
