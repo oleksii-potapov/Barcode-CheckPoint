@@ -10,10 +10,14 @@ namespace CheckPoint.View.Interfaces
         BindingList<Employee> Employees { get; set; }
         Employee CurrentEmployee { get; set; }
         int SelectedEmployeeIndex { get; set; }
+        string Filter { get; set; }
+
 
         event EventHandler OnAddEmployee;
         event EventHandler OnDeleteEmployee;
         event EventHandler OnEditEmployee;
         event EventHandler OnCurrentEmployeeChanged;
+        event EventHandler OnFiltered;
+        event EventHandler OnCleanFilter;
     }
 }

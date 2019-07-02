@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CheckPoint.Model;
+using CheckPoint.Model.Entities;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
 
@@ -27,7 +29,18 @@ namespace CheckPoint.Presenter
             View.OnAddEmployee += View_OnAddEmployee;
             View.OnDeleteEmployee += View_OnDeleteEmployee;
             View.OnEditEmployee += View_OnEditEmployee;
+            View.OnCleanFilter += View_OnCleanFilter;
+            View.OnFiltered += View_OnFiltered;
+        }
 
+        private void View_OnFiltered(object sender, EventArgs e)
+        {
+            View.Employees = new BindingList<Employee>(_context.Employees.Local.Where(emp => emp.FullName.IndexOf(View.Filter, StringComparison.OrdinalIgnoreCase) >= 0).ToList());
+        }
+
+        private void View_OnCleanFilter(object sender, EventArgs e)
+        {
+            View.Employees = _context.Employees.Local.ToBindingList();
         }
 
         private void View_OnEditEmployee(object sender, EventArgs e)

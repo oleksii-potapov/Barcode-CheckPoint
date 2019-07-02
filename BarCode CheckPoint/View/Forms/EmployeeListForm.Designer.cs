@@ -39,13 +39,16 @@
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Patronymic = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PostId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textFilter = new System.Windows.Forms.TextBox();
+            this.buttonCleanFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridEmployee)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDelete.Location = new System.Drawing.Point(452, 220);
+            this.buttonDelete.Location = new System.Drawing.Point(452, 295);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(173, 42);
             this.buttonDelete.TabIndex = 9;
@@ -55,7 +58,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonEdit.Location = new System.Drawing.Point(232, 220);
+            this.buttonEdit.Location = new System.Drawing.Point(232, 295);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(173, 42);
             this.buttonEdit.TabIndex = 8;
@@ -65,7 +68,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAdd.Location = new System.Drawing.Point(12, 220);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 295);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(173, 42);
             this.buttonAdd.TabIndex = 7;
@@ -88,12 +91,12 @@
             this.LastName,
             this.Patronymic,
             this.PostId});
-            this.gridEmployee.Location = new System.Drawing.Point(12, 12);
+            this.gridEmployee.Location = new System.Drawing.Point(12, 51);
             this.gridEmployee.MultiSelect = false;
             this.gridEmployee.Name = "gridEmployee";
             this.gridEmployee.ReadOnly = true;
             this.gridEmployee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridEmployee.Size = new System.Drawing.Size(613, 202);
+            this.gridEmployee.Size = new System.Drawing.Size(613, 238);
             this.gridEmployee.TabIndex = 6;
             // 
             // BarCode
@@ -101,12 +104,14 @@
             this.BarCode.DataPropertyName = "BarCode";
             this.BarCode.HeaderText = "BarCode";
             this.BarCode.Name = "BarCode";
+            this.BarCode.ReadOnly = true;
             // 
             // FullName
             // 
             this.FullName.DataPropertyName = "FullName";
             this.FullName.HeaderText = "FullName";
             this.FullName.Name = "FullName";
+            this.FullName.ReadOnly = true;
             this.FullName.Width = 200;
             // 
             // Post
@@ -114,6 +119,7 @@
             this.Post.DataPropertyName = "Post";
             this.Post.HeaderText = "Post";
             this.Post.Name = "Post";
+            this.Post.ReadOnly = true;
             this.Post.Width = 250;
             // 
             // FirstName
@@ -121,6 +127,7 @@
             this.FirstName.DataPropertyName = "FirstName";
             this.FirstName.HeaderText = "FirstName";
             this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
             this.FirstName.Visible = false;
             // 
             // LastName
@@ -128,6 +135,7 @@
             this.LastName.DataPropertyName = "LastName";
             this.LastName.HeaderText = "LastName";
             this.LastName.Name = "LastName";
+            this.LastName.ReadOnly = true;
             this.LastName.Visible = false;
             // 
             // Patronymic
@@ -135,6 +143,7 @@
             this.Patronymic.DataPropertyName = "Patronymic";
             this.Patronymic.HeaderText = "Patronymic";
             this.Patronymic.Name = "Patronymic";
+            this.Patronymic.ReadOnly = true;
             this.Patronymic.Visible = false;
             // 
             // PostId
@@ -142,13 +151,42 @@
             this.PostId.DataPropertyName = "PostId";
             this.PostId.HeaderText = "PostId";
             this.PostId.Name = "PostId";
+            this.PostId.ReadOnly = true;
             this.PostId.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Filter (press Enter to activate)";
+            // 
+            // textFilter
+            // 
+            this.textFilter.Location = new System.Drawing.Point(12, 25);
+            this.textFilter.Name = "textFilter";
+            this.textFilter.Size = new System.Drawing.Size(170, 20);
+            this.textFilter.TabIndex = 11;
+            // 
+            // buttonCleanFilter
+            // 
+            this.buttonCleanFilter.Location = new System.Drawing.Point(188, 25);
+            this.buttonCleanFilter.Name = "buttonCleanFilter";
+            this.buttonCleanFilter.Size = new System.Drawing.Size(138, 20);
+            this.buttonCleanFilter.TabIndex = 12;
+            this.buttonCleanFilter.Text = "Clean and disable filter";
+            this.buttonCleanFilter.UseVisualStyleBackColor = true;
             // 
             // EmployeeListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 274);
+            this.ClientSize = new System.Drawing.Size(637, 349);
+            this.Controls.Add(this.buttonCleanFilter);
+            this.Controls.Add(this.textFilter);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
@@ -159,6 +197,7 @@
             this.Text = "EmployeeForm";
             ((System.ComponentModel.ISupportInitialize)(this.gridEmployee)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -175,5 +214,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Patronymic;
         private System.Windows.Forms.DataGridViewTextBoxColumn PostId;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textFilter;
+        private System.Windows.Forms.Button buttonCleanFilter;
     }
 }

@@ -22,9 +22,25 @@ namespace CheckPoint.View.Forms
             buttonEdit.Click += ButtonEdit_Click;
             gridEmployee.SelectionChanged += GridEmployee_SelectionChanged;
             gridEmployee.CellDoubleClick += ButtonEdit_Click;
+            buttonCleanFilter.Click += ButtonCleanFilter_Click;
+            textFilter.KeyUp += TextFilter_KeyUp;
         }
 
         #region forwarding events
+        private void TextFilter_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                textFilter.BackColor = Color.LimeGreen;
+                OnFiltered?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private void ButtonCleanFilter_Click(object sender, EventArgs e)
+        {
+            textFilter.BackColor = DefaultBackColor;
+            OnCleanFilter?.Invoke(this, EventArgs.Empty);
+        }
 
         private void GridEmployee_SelectionChanged(object sender, EventArgs e)
         {
@@ -58,6 +74,11 @@ namespace CheckPoint.View.Forms
         }
         public Employee CurrentEmployee { get; set; }
         public int SelectedEmployeeIndex { get; set; }
+        public string Filter
+        {
+            get => textFilter.Text;
+            set => textFilter.Text = value;
+        }
 
         #region events
 
@@ -65,6 +86,8 @@ namespace CheckPoint.View.Forms
         public event EventHandler OnDeleteEmployee;
         public event EventHandler OnEditEmployee;
         public event EventHandler OnCurrentEmployeeChanged;
+        public event EventHandler OnFiltered;
+        public event EventHandler OnCleanFilter;
 
         #endregion
 
