@@ -13,7 +13,9 @@ namespace CheckPoint.View.Interfaces
         DateTime DateTimeBegin { get; set; }
         DateTime DateTimeEnd { get; set; }
         string BarCode { get; set; }
+        string EmployeeName { get; }
         BindingList<Employee> Employees { get; set; }
+        bool ShowOnlySelectedEmployeeChecks { get; set; }
 
         event EventHandler OnGenerateExcelReport;
         event EventHandler OnGenerateTimeSheet;

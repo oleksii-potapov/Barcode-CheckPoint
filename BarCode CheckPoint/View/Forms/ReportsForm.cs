@@ -59,10 +59,18 @@ namespace CheckPoint.View.Forms
             set => comboEmployee.SelectedValue = value;
         }
 
+        public string EmployeeName => comboEmployee.SelectedItem.ToString();
+
         public BindingList<Employee> Employees
         {
             get => (BindingList<Employee>) comboEmployee.DataSource;
             set => comboEmployee.DataSource = value;
+        }
+
+        public bool ShowOnlySelectedEmployeeChecks
+        {
+            get => checkOnlySelectedEmployee.Checked;
+            set => checkOnlySelectedEmployee.Checked = value;
         }
 
         public event EventHandler OnGenerateExcelReport;

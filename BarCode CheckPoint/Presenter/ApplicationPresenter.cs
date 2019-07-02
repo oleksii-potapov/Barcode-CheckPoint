@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using CheckPoint.Model;
@@ -31,28 +32,24 @@ namespace CheckPoint.Presenter
 
         private void _mainFormPresenter_ReportsFormShow(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (!IsDataBaseConnected())
+                return;
+            ReportsFormPresenter reportsFormPresenter = new ReportsFormPresenter(_messageService, _context);
+            reportsFormPresenter.View.ShowForm();
         }
 
         private void _mainFormPresenter_EmployeeListFormShow(object sender, EventArgs e)
         {
-            if (!_context.IsConnected)
-            {
-                _messageService.ShowError("Database not connected");
+            if (!IsDataBaseConnected())
                 return;
-            }
-
             EmployeeListFormPresenter employeeListFormPresenter = new EmployeeListFormPresenter(_messageService, _context);
             employeeListFormPresenter.View.ShowForm();
         }
 
         private void _mainFormPresenter_PostListFormShow(object sender, EventArgs e)
         {
-            if (!_context.IsConnected)
-            {
-                _messageService.ShowError("Database not connected");
+            if (!IsDataBaseConnected())
                 return;
-            }
             PostListFormPresenter postListFormPresenter = new PostListFormPresenter(_messageService, _context);
             postListFormPresenter.View.ShowForm();
         }
@@ -83,6 +80,17 @@ namespace CheckPoint.Presenter
             });
             checkDataBase.Start();
             return _mainFormPresenter.View;
+        }
+
+        private bool IsDataBaseConnected()
+        {
+            if (!_context.IsConnected)
+            {
+                _messageService.ShowError("Database not connected");
+                return false;
+            }
+
+            return true;
         }
     }
 }

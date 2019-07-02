@@ -97,6 +97,9 @@
     <Compile Include="Model\Entities\Employee.cs" />
     <Compile Include="Model\Entities\Post.cs" />
     <Compile Include="Model\Entities\ShiftCheck.cs" />
+    <Compile Include="Model\Reports\ExcelReport.cs" />
+    <Compile Include="Model\Reports\FilterOptions.cs" />
+    <Compile Include="Model\Reports\ShiftChecksExcelReport.cs" />
     <Compile Include="Presenter\ApplicationPresenter.cs" />
     <Compile Include="Presenter\EmployeeFormPresenter.cs" />
     <Compile Include="Presenter\EmployeeListFormPresenter.cs" />

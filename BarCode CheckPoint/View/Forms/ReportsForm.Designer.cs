@@ -36,6 +36,7 @@
             this.comboEmployee = new System.Windows.Forms.ComboBox();
             this.buttonGenerateExcelReport = new System.Windows.Forms.Button();
             this.buttonGenerateTimeSheet = new System.Windows.Forms.Button();
+            this.checkOnlySelectedEmployee = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // dateTimeBegin
@@ -84,16 +85,18 @@
             // 
             // comboEmployee
             // 
+            this.comboEmployee.DisplayMember = "FullName";
             this.comboEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEmployee.FormattingEnabled = true;
             this.comboEmployee.Location = new System.Drawing.Point(80, 65);
             this.comboEmployee.Name = "comboEmployee";
             this.comboEmployee.Size = new System.Drawing.Size(230, 21);
             this.comboEmployee.TabIndex = 5;
+            this.comboEmployee.ValueMember = "BarCode";
             // 
             // buttonGenerateExcelReport
             // 
-            this.buttonGenerateExcelReport.Location = new System.Drawing.Point(171, 106);
+            this.buttonGenerateExcelReport.Location = new System.Drawing.Point(13, 157);
             this.buttonGenerateExcelReport.Name = "buttonGenerateExcelReport";
             this.buttonGenerateExcelReport.Size = new System.Drawing.Size(139, 36);
             this.buttonGenerateExcelReport.TabIndex = 6;
@@ -102,18 +105,30 @@
             // 
             // buttonGenerateTimeSheet
             // 
-            this.buttonGenerateTimeSheet.Location = new System.Drawing.Point(171, 148);
+            this.buttonGenerateTimeSheet.Location = new System.Drawing.Point(171, 157);
             this.buttonGenerateTimeSheet.Name = "buttonGenerateTimeSheet";
             this.buttonGenerateTimeSheet.Size = new System.Drawing.Size(139, 36);
             this.buttonGenerateTimeSheet.TabIndex = 7;
             this.buttonGenerateTimeSheet.Text = "Generate timesheet";
             this.buttonGenerateTimeSheet.UseVisualStyleBackColor = true;
             // 
+            // checkOnlySelectedEmployee
+            // 
+            this.checkOnlySelectedEmployee.AutoSize = true;
+            this.checkOnlySelectedEmployee.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkOnlySelectedEmployee.Location = new System.Drawing.Point(144, 92);
+            this.checkOnlySelectedEmployee.Name = "checkOnlySelectedEmployee";
+            this.checkOnlySelectedEmployee.Size = new System.Drawing.Size(166, 17);
+            this.checkOnlySelectedEmployee.TabIndex = 8;
+            this.checkOnlySelectedEmployee.Text = "Show only selected employee";
+            this.checkOnlySelectedEmployee.UseVisualStyleBackColor = true;
+            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(324, 205);
+            this.Controls.Add(this.checkOnlySelectedEmployee);
             this.Controls.Add(this.buttonGenerateTimeSheet);
             this.Controls.Add(this.buttonGenerateExcelReport);
             this.Controls.Add(this.comboEmployee);
@@ -123,6 +138,7 @@
             this.Controls.Add(this.dateTimeEnd);
             this.Controls.Add(this.dateTimeBegin);
             this.Name = "ReportsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReportsForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -139,5 +155,6 @@
         private System.Windows.Forms.ComboBox comboEmployee;
         private System.Windows.Forms.Button buttonGenerateExcelReport;
         private System.Windows.Forms.Button buttonGenerateTimeSheet;
+        private System.Windows.Forms.CheckBox checkOnlySelectedEmployee;
     }
 }
