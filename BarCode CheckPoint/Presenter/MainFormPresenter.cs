@@ -21,6 +21,7 @@ namespace CheckPoint.Presenter
         public event EventHandler SettingsFormShow;
         public event EventHandler EmployeeListFormShow;
         public event EventHandler PostListFormShow;
+        public event EventHandler ReportsFormShow;
 
         public MainFormPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
         {
@@ -39,11 +40,17 @@ namespace CheckPoint.Presenter
             View.OnFormClose += ViewOnFormClose;
             View.OnEmployeesClick += View_EmployeesClick;
             View.OnPostsClick += View_PostsClick;
+            View.OnReportsClick += View_OnReportsClick;
             _webCamera.CameraImageChanged += _webCamera_CameraImageChanged;
         }
 
+
         #region Events of form showing forwarding
 
+        private void View_OnReportsClick(object sender, EventArgs e)
+        {
+            ReportsFormShow?.Invoke(this, EventArgs.Empty);
+        }
         private void View_PostsClick(object sender, EventArgs e)
         {
             PostListFormShow?.Invoke(this, EventArgs.Empty);

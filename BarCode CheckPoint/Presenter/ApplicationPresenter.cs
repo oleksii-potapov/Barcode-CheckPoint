@@ -26,6 +26,12 @@ namespace CheckPoint.Presenter
             _mainFormPresenter.SettingsFormShow += _mainFormPresenter_SettingsFormShow;
             _mainFormPresenter.PostListFormShow += _mainFormPresenter_PostListFormShow;
             _mainFormPresenter.EmployeeListFormShow += _mainFormPresenter_EmployeeListFormShow;
+            _mainFormPresenter.ReportsFormShow += _mainFormPresenter_ReportsFormShow;
+        }
+
+        private void _mainFormPresenter_ReportsFormShow(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void _mainFormPresenter_EmployeeListFormShow(object sender, EventArgs e)
