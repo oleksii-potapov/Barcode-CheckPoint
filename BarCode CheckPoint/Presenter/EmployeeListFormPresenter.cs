@@ -19,6 +19,7 @@ namespace CheckPoint.Presenter
         private readonly IMessageService _messageService;
         private readonly EmployeeRepository _employeeRepository;
         private readonly ShiftCheckRepository _shiftCheckRepository;
+        private bool _isFiltered = false;
         public IEmployeeListForm View { get; }
 
         public EmployeeListFormPresenter(IMessageService messageService, ApplicationContext context)
@@ -37,12 +38,13 @@ namespace CheckPoint.Presenter
 
         private void View_OnFiltered(object sender, EventArgs e)
         {
-            UpdateEmployees(emp =>
-                emp.FullName.IndexOf(View.Filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            _isFiltered = true;
+            UpdateEmployees();
         }
 
         private void View_OnCleanFilter(object sender, EventArgs e)
         {
+            _isFiltered = false;
             UpdateEmployees();
         }
 
@@ -78,15 +80,23 @@ namespace CheckPoint.Presenter
         {
             EmployeeFormPresenter addEmployeeFormPresenter = new EmployeeFormPresenter(_messageService);
             addEmployeeFormPresenter.View.ShowForm();
-            UpdateEmployees();
         }
 
-        private void UpdateEmployees(Expression<Func<Employee, bool>> @where = null)
+        private void UpdateEmployees()
         {
-            if (where == null)
-                View.Employees = _employeeRepository.GetAll();
+
+            if (_isFiltered)
+            {
+                Expression < Func<Employee, bool>> @where = (emp) =>
+                    emp.FirstName.ToUpper().Contains(View.Filter.ToUpper()) ||
+                    emp.LastName.ToUpper().Contains(View.Filter.ToUpper()) ||
+                    emp.Patronymic.ToUpper().Contains(View.Filter.ToUpper());
+                    
+                View.Employees = _employeeRepository.GetSome(@where);
+            }
             else
-                View.Employees = _employeeRepository.GetSome(where);
+                View.Employees = _employeeRepository.GetAll();
+                
         }
     }
 }

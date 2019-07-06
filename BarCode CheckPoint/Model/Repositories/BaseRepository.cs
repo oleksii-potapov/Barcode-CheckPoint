@@ -61,20 +61,20 @@ namespace CheckPoint.Model.Repositories
 
         public List<T> GetSome(Expression<Func<T, bool>> @where)
         {
-            return _dbSet.Where(where).ToList();
+            return _dbSet.Where(where).AsNoTracking().ToList();
         }
 
         public virtual List<T> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsNoTracking().ToList();
         }
 
         public List<T> GetAll<TSortField>(Expression<Func<T, TSortField>> orderBy, bool @ascending)
         {
             if (ascending)
-                return _dbSet.OrderBy(orderBy).ToList();
+                return _dbSet.OrderBy(orderBy).AsNoTracking().ToList();
             else
-                return _dbSet.OrderByDescending(orderBy).ToList();
+                return _dbSet.OrderByDescending(orderBy).AsNoTracking().ToList();
         }
 
         internal int SaveChanges()
