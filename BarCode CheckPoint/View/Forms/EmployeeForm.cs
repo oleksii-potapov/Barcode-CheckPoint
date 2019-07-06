@@ -78,7 +78,11 @@ namespace CheckPoint.View.Forms
             set => textBarCode.Text = value;
         }
 
-        public bool IsCodeActive { get; set; }
+        public bool IsCodeActive
+        {
+            get => textBarCode.Enabled;
+            set => textBarCode.Enabled = value;
+        }
 
         public List<Post> PostList
         {

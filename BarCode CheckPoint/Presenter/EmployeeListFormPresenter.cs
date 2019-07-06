@@ -52,6 +52,7 @@ namespace CheckPoint.Presenter
         {
             EmployeeFormPresenter editEmployeeFormPresenter =
                 new EmployeeFormPresenter(_messageService, View.CurrentEmployee);
+            editEmployeeFormPresenter.View.IsCodeActive = false;
             editEmployeeFormPresenter.View.ShowForm();
         }
 
@@ -79,6 +80,7 @@ namespace CheckPoint.Presenter
         private void View_OnAddEmployee(object sender, EventArgs e)
         {
             EmployeeFormPresenter addEmployeeFormPresenter = new EmployeeFormPresenter(_messageService);
+            addEmployeeFormPresenter.View.IsCodeActive = true;
             addEmployeeFormPresenter.View.ShowForm();
         }
 
