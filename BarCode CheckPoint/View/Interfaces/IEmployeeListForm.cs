@@ -7,7 +7,7 @@ namespace CheckPoint.View.Interfaces
 {
     public interface IEmployeeListForm : IForm
     {
-        BindingList<Employee> Employees { get; set; }
+        List<Employee> Employees { get; set; }
         Employee CurrentEmployee { get; set; }
         int SelectedEmployeeIndex { get; set; }
         string Filter { get; set; }

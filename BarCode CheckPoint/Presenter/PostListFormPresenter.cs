@@ -23,7 +23,7 @@ namespace CheckPoint.Presenter
             _messageService = messageService;
             _context = context;
             _context.Posts.Load();
-            View = new PostListForm {Posts = _context.Posts.Local.ToBindingList()};
+            View = new PostListForm {Posts = _context.Posts.Local.ToList()};
 
             View.OnAddPost += View_OnAddPost;
             View.OnDeletePost += View_OnDeletePost;

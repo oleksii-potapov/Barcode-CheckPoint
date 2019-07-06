@@ -67,9 +67,9 @@ namespace CheckPoint.View.Forms
 
         #endregion
 
-        public BindingList<Employee> Employees
+        public List<Employee> Employees
         {
-            get => (BindingList<Employee>) gridEmployee.DataSource;
+            get => (List<Employee>) gridEmployee.DataSource;
             set => gridEmployee.DataSource = value;
         }
         public Employee CurrentEmployee { get; set; }

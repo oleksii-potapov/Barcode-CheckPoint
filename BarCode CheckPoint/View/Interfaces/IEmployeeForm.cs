@@ -19,7 +19,9 @@ namespace CheckPoint.View.Interfaces
         string Patronymic { get; set; }
         int PostId { get; set; }
         string BarCode { get; set; }
-        BindingList<Post> PostList { get; set; }
+
+        bool IsCodeActive { get; set; }
+        List<Post> PostList { get; set; }
 
         event EventHandler OnFormShow;
         event EventHandler OnApplyChanges;

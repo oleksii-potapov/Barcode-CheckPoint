@@ -37,9 +37,9 @@ namespace CheckPoint.View.Forms
             OnCurrentPostChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public BindingList<Post> Posts
+        public List<Post> Posts
         {
-            get => (BindingList<Post>) gridPost.DataSource;
+            get => (List<Post>) gridPost.DataSource;
             set => gridPost.DataSource = value;
         }
 

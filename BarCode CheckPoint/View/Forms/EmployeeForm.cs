@@ -15,6 +15,8 @@ namespace CheckPoint.View.Forms
 {
     public partial class EmployeeForm : Form, IEmployeeForm
     {
+        private List<Post> _postList;
+
         public EmployeeForm()
         {
             InitializeComponent();
@@ -76,9 +78,11 @@ namespace CheckPoint.View.Forms
             set => textBarCode.Text = value;
         }
 
-        public BindingList<Post> PostList
+        public bool IsCodeActive { get; set; }
+
+        public List<Post> PostList
         {
-            get => (BindingList<Post>) comboPosts.DataSource;
+            get => (List<Post>) comboPosts.DataSource;
             set => comboPosts.DataSource = value;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CheckPoint.Model;
 using CheckPoint.Model.Entities;
+using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
 
@@ -15,20 +17,22 @@ namespace CheckPoint.Presenter
 {
     class EmployeeFormPresenter
     {
-        private readonly ApplicationContext _context;
         private readonly IMessageService _messageService;
         private Employee _currentEmployee;
         private readonly bool _isNewRecord;
+        private readonly PostRepository _postRepository;
+        private readonly EmployeeRepository _employeeRepository;
         public IEmployeeForm View { get; }
 
-        public EmployeeFormPresenter(IMessageService messageService, ApplicationContext context, Employee currentEmployee = null)
+        public EmployeeFormPresenter(IMessageService messageService, Employee currentEmployee = null)
         {
-            _context = context;
             _messageService = messageService;
             _currentEmployee = currentEmployee;
             _isNewRecord = currentEmployee == null;
-            _context.Posts.Load();
-            View = new EmployeeForm() {PostList = _context.Posts.Local.ToBindingList()};
+            _postRepository = new PostRepository();
+            _employeeRepository = new EmployeeRepository();
+
+            View = new EmployeeForm() {PostList = _postRepository.GetAll()};
 
             View.OnFormShow += View_OnFormShow;
             View.OnApplyChanges += View_OnApplyChanges;
@@ -49,7 +53,7 @@ namespace CheckPoint.Presenter
                 return;
             }
 
-            if (_context.Employees.FirstOrDefault(emp => emp.BarCode == View.BarCode) != null && _isNewRecord)
+            if (_employeeRepository.GetOne(View.BarCode) != null && _isNewRecord)
             {
                 _messageService.ShowError("BarCode already exists in the database!");
                 return;
@@ -72,6 +76,7 @@ namespace CheckPoint.Presenter
 
         private void FillData()
         {
+            _currentEmployee = _employeeRepository.GetOne(_currentEmployee.BarCode);
             View.BarCode = _currentEmployee.BarCode;
             View.FirstName = _currentEmployee.FirstName;
             View.LastName = _currentEmployee.LastName;
@@ -92,8 +97,7 @@ namespace CheckPoint.Presenter
             _currentEmployee.LastName = View.LastName;
             _currentEmployee.Patronymic = View.Patronymic;
             _currentEmployee.PostId = View.PostId;
-            _context.Employees.Add(_currentEmployee);
-            _context.SaveChanges();
+            _employeeRepository.Add(_currentEmployee);
         }
 
         private void EditRecord()
@@ -103,8 +107,7 @@ namespace CheckPoint.Presenter
             _currentEmployee.LastName = View.LastName;
             _currentEmployee.Patronymic = View.Patronymic;
             _currentEmployee.PostId = View.PostId;
-            _context.Entry(_currentEmployee).State = EntityState.Modified;
-            _context.SaveChanges();
+            _employeeRepository.Update(_currentEmployee);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CheckPoint.Presenter
         {
             _messageService = new MessageService();
             _context = new ApplicationContext();
-            _mainFormPresenter = new MainFormPresenter(new MainForm(), _messageService, _context);
+            _mainFormPresenter = new MainFormPresenter(new MainForm(), _messageService);
             _mainFormPresenter.SettingsFormShow += _mainFormPresenter_SettingsFormShow;
             _mainFormPresenter.PostListFormShow += _mainFormPresenter_PostListFormShow;
             _mainFormPresenter.EmployeeListFormShow += _mainFormPresenter_EmployeeListFormShow;
@@ -32,24 +32,18 @@ namespace CheckPoint.Presenter
 
         private void _mainFormPresenter_ReportsFormShow(object sender, EventArgs e)
         {
-            if (!IsDataBaseConnected())
-                return;
             ReportsFormPresenter reportsFormPresenter = new ReportsFormPresenter(_messageService, _context);
             reportsFormPresenter.View.ShowForm();
         }
 
         private void _mainFormPresenter_EmployeeListFormShow(object sender, EventArgs e)
         {
-            if (!IsDataBaseConnected())
-                return;
             EmployeeListFormPresenter employeeListFormPresenter = new EmployeeListFormPresenter(_messageService, _context);
             employeeListFormPresenter.View.ShowForm();
         }
 
         private void _mainFormPresenter_PostListFormShow(object sender, EventArgs e)
         {
-            if (!IsDataBaseConnected())
-                return;
             PostListFormPresenter postListFormPresenter = new PostListFormPresenter(_messageService, _context);
             postListFormPresenter.View.ShowForm();
         }
@@ -69,28 +63,8 @@ namespace CheckPoint.Presenter
 
         public IMainForm GetMainForm()
         {
-            _mainFormPresenter.View.ProcessStatus = "DataBase connecting...";
-            Task checkDataBase = new Task(() =>
-            {
-                if (_context.Database.Exists())
-                {
-                    _context.IsConnected = true;
-                    _mainFormPresenter.View.ProcessStatus = "DataBase connected.";
-                }
-            });
-            checkDataBase.Start();
             return _mainFormPresenter.View;
         }
 
-        private bool IsDataBaseConnected()
-        {
-            if (!_context.IsConnected)
-            {
-                _messageService.ShowError("Database not connected");
-                return false;
-            }
-
-            return true;
-        }
     }
 }
