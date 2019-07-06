@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CheckPoint.Model;
 using CheckPoint.Model.Entities;
+using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
 
@@ -15,15 +16,16 @@ namespace CheckPoint.Presenter
     class PostListFormPresenter
     {
         private readonly IMessageService _messageService;
-        private readonly ApplicationContext _context;
+        private readonly PostRepository _postRepository;
+        private readonly EmployeeRepository _employeeRepository;
         public IPostListForm View { get; }
 
         public PostListFormPresenter(IMessageService messageService, ApplicationContext context)
         {
             _messageService = messageService;
-            _context = context;
-            _context.Posts.Load();
-            View = new PostListForm {Posts = _context.Posts.Local.ToList()};
+            _postRepository = new PostRepository();
+            _employeeRepository = new EmployeeRepository();
+            View = new PostListForm {Posts = _postRepository.GetAll()};
 
             View.OnAddPost += View_OnAddPost;
             View.OnDeletePost += View_OnDeletePost;
@@ -32,14 +34,14 @@ namespace CheckPoint.Presenter
 
         private void View_OnEditPost(object sender, EventArgs e)
         {
-            _context.SaveChanges();
+            
         }
 
         private void View_OnDeletePost(object sender, EventArgs e)
         {
-            var postToDelete = _context.Posts.Find(View.CurrentPost.PostId);
+            var postToDelete = _postRepository.GetOne(View.CurrentPost.PostId);
             if (postToDelete == null) return;
-            if (_context.Employees.FirstOrDefault(emp => emp.PostId == View.CurrentPost.PostId) != null)
+            if (_employeeRepository.GetSome(emp => emp.PostId == View.CurrentPost.PostId).Count > 0)
             {
                 _messageService.ShowError("There are records in Employee table with this post." +
                                           Environment.NewLine + "Deletion of this record is impossible.");
@@ -47,8 +49,7 @@ namespace CheckPoint.Presenter
             }
             try
             {
-                _context.Posts.Remove(postToDelete);
-                _context.SaveChanges();
+                _postRepository.Delete(postToDelete);
             }
             catch (DbUpdateException exception)
             {
@@ -60,10 +61,9 @@ namespace CheckPoint.Presenter
         private void View_OnAddPost(object sender, EventArgs e)
         {
             if (View.PostToAdd == string.Empty) return;
-            if (_context.Posts.FirstOrDefault(s => s.Name == View.PostToAdd) != null) return;
+            if (_postRepository.GetOne(View.PostToAdd) != null) return;
             var postToAdd = new Post() {Name = View.PostToAdd};
-            _context.Posts.Add(postToAdd);
-            _context.SaveChanges();
+            _postRepository.Add(postToAdd);
         }
 
     }
