@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,9 +38,9 @@ namespace CheckPoint.View.Forms
             OnCurrentPostChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public List<Post> Posts
+        public BindingList<Post> Posts
         {
-            get => (List<Post>) gridPost.DataSource;
+            get => (BindingList<Post>) gridPost.DataSource;
             set => gridPost.DataSource = value;
         }
 

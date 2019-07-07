@@ -25,7 +25,7 @@ namespace CheckPoint.Presenter
             _messageService = messageService;
             _postRepository = new PostRepository();
             _employeeRepository = new EmployeeRepository();
-            View = new PostListForm {Posts = _postRepository.GetAll()};
+            View = new PostListForm {Posts = _postRepository.GetBindingList()};
 
             View.OnAddPost += View_OnAddPost;
             View.OnDeletePost += View_OnDeletePost;
@@ -34,7 +34,7 @@ namespace CheckPoint.Presenter
 
         private void View_OnEditPost(object sender, EventArgs e)
         {
-            
+            _postRepository.Update(View.CurrentPost);
         }
 
         private void View_OnDeletePost(object sender, EventArgs e)
@@ -61,10 +61,9 @@ namespace CheckPoint.Presenter
         private void View_OnAddPost(object sender, EventArgs e)
         {
             if (View.PostToAdd == string.Empty) return;
-            if (_postRepository.GetOne(View.PostToAdd) != null) return;
+            if (_postRepository.AnyPostByPostName(View.PostToAdd)) return;
             var postToAdd = new Post() {Name = View.PostToAdd};
             _postRepository.Add(postToAdd);
         }
-
     }
 }

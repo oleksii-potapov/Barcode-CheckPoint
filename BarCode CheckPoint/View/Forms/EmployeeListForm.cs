@@ -38,7 +38,7 @@ namespace CheckPoint.View.Forms
 
         private void ButtonCleanFilter_Click(object sender, EventArgs e)
         {
-            textFilter.BackColor = DefaultBackColor;
+            textFilter.BackColor = Color.White;
             OnCleanFilter?.Invoke(this, EventArgs.Empty);
         }
 
@@ -67,9 +67,9 @@ namespace CheckPoint.View.Forms
 
         #endregion
 
-        public List<Employee> Employees
+        public BindingList<Employee> Employees
         {
-            get => (List<Employee>) gridEmployee.DataSource;
+            get => (BindingList<Employee>) gridEmployee.DataSource;
             set => gridEmployee.DataSource = value;
         }
         public Employee CurrentEmployee { get; set; }

@@ -10,7 +10,7 @@ namespace CheckPoint.View.Interfaces
 {
     public interface IPostListForm : IForm
     {
-        List<Post> Posts { get; set; }
+        BindingList<Post> Posts { get; set; }
         Post CurrentPost { get; }
         int SelectedPostIndex { get; set; }
         string PostToAdd { get; set; }

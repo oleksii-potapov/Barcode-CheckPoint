@@ -38,7 +38,7 @@ namespace CheckPoint.Presenter
 
         private void _mainFormPresenter_EmployeeListFormShow(object sender, EventArgs e)
         {
-            EmployeeListFormPresenter employeeListFormPresenter = new EmployeeListFormPresenter(_messageService, _context);
+            EmployeeListFormPresenter employeeListFormPresenter = new EmployeeListFormPresenter(_messageService);
             employeeListFormPresenter.View.ShowForm();
         }
 

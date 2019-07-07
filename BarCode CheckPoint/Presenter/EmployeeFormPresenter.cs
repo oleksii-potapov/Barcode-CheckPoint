@@ -23,20 +23,27 @@ namespace CheckPoint.Presenter
         private readonly PostRepository _postRepository;
         private readonly EmployeeRepository _employeeRepository;
         public IEmployeeForm View { get; }
+        public event EventHandler OnFormClose;
 
-        public EmployeeFormPresenter(IMessageService messageService, Employee currentEmployee = null)
+        public EmployeeFormPresenter(IMessageService messageService, EmployeeRepository employeeRepository, Employee currentEmployee = null)
         {
             _messageService = messageService;
             _currentEmployee = currentEmployee;
             _isNewRecord = currentEmployee == null;
             _postRepository = new PostRepository();
-            _employeeRepository = new EmployeeRepository();
+            _employeeRepository = employeeRepository;
 
             View = new EmployeeForm() {PostList = _postRepository.GetAll()};
 
             View.OnFormShow += View_OnFormShow;
             View.OnApplyChanges += View_OnApplyChanges;
             View.OnChoosePhoto += View_OnChoosePhoto;
+            View.OnFormClose += View_OnFormClose;
+        }
+
+        private void View_OnFormClose(object sender, EventArgs e)
+        {
+            OnFormClose?.Invoke(this, EventArgs.Empty);
         }
 
         private void View_OnChoosePhoto(object sender, View.Services.EventPhotoArgs e)
@@ -91,12 +98,14 @@ namespace CheckPoint.Presenter
 
         private void AddRecord()
         {
-            _currentEmployee = new Employee();
-            _currentEmployee.BarCode = View.BarCode;
-            _currentEmployee.FirstName = View.FirstName;
-            _currentEmployee.LastName = View.LastName;
-            _currentEmployee.Patronymic = View.Patronymic;
-            _currentEmployee.PostId = View.PostId;
+            _currentEmployee = new Employee
+            {
+                BarCode = View.BarCode,
+                FirstName = View.FirstName,
+                LastName = View.LastName,
+                Patronymic = View.Patronymic,
+                PostId = View.PostId
+            };
             _employeeRepository.Add(_currentEmployee);
         }
 

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using CheckPoint.Model;
 using CheckPoint.Model.Entities;
 using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
@@ -22,12 +17,12 @@ namespace CheckPoint.Presenter
         private bool _isFiltered = false;
         public IEmployeeListForm View { get; }
 
-        public EmployeeListFormPresenter(IMessageService messageService, ApplicationContext context)
+        public EmployeeListFormPresenter(IMessageService messageService)
         {
             _employeeRepository = new EmployeeRepository();
             _shiftCheckRepository = new ShiftCheckRepository();
             _messageService = messageService;
-            View = new EmployeeListForm() {Employees = _employeeRepository.GetAll()};
+            View = new EmployeeListForm() {Employees = _employeeRepository.GetBindingList()};
 
             View.OnAddEmployee += View_OnAddEmployee;
             View.OnDeleteEmployee += View_OnDeleteEmployee;
@@ -45,14 +40,16 @@ namespace CheckPoint.Presenter
         private void View_OnCleanFilter(object sender, EventArgs e)
         {
             _isFiltered = false;
+            View.Filter = string.Empty;
             UpdateEmployees();
         }
 
         private void View_OnEditEmployee(object sender, EventArgs e)
         {
             EmployeeFormPresenter editEmployeeFormPresenter =
-                new EmployeeFormPresenter(_messageService, View.CurrentEmployee);
+                new EmployeeFormPresenter(_messageService, _employeeRepository, View.CurrentEmployee);
             editEmployeeFormPresenter.View.IsCodeActive = false;
+            editEmployeeFormPresenter.OnFormClose += (o, args) => UpdateEmployees();
             editEmployeeFormPresenter.View.ShowForm();
         }
 
@@ -79,26 +76,24 @@ namespace CheckPoint.Presenter
 
         private void View_OnAddEmployee(object sender, EventArgs e)
         {
-            EmployeeFormPresenter addEmployeeFormPresenter = new EmployeeFormPresenter(_messageService);
+            EmployeeFormPresenter addEmployeeFormPresenter = new EmployeeFormPresenter(_messageService, _employeeRepository);
             addEmployeeFormPresenter.View.IsCodeActive = true;
+            addEmployeeFormPresenter.OnFormClose += (o, args) => UpdateEmployees();
             addEmployeeFormPresenter.View.ShowForm();
         }
 
         private void UpdateEmployees()
         {
-
+            View.Employees = _employeeRepository.GetBindingList();
             if (_isFiltered)
             {
-                Expression < Func<Employee, bool>> @where = (emp) =>
+                Expression <Func<Employee, bool>> @where = (emp) =>
                     emp.FirstName.ToUpper().Contains(View.Filter.ToUpper()) ||
                     emp.LastName.ToUpper().Contains(View.Filter.ToUpper()) ||
                     emp.Patronymic.ToUpper().Contains(View.Filter.ToUpper());
                     
-                View.Employees = _employeeRepository.GetSome(@where);
+                View.Employees = new BindingList<Employee>(View.Employees.AsQueryable().Where(@where).ToList());
             }
-            else
-                View.Employees = _employeeRepository.GetAll();
-                
         }
     }
 }

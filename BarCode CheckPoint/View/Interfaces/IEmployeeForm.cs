@@ -25,6 +25,7 @@ namespace CheckPoint.View.Interfaces
 
         event EventHandler OnFormShow;
         event EventHandler OnApplyChanges;
+        event EventHandler OnFormClose;
         event EventHandler<EventPhotoArgs> OnChoosePhoto;
     }
 
