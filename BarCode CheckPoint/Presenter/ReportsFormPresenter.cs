@@ -34,11 +34,10 @@ namespace CheckPoint.Presenter
 
         private void View_OnGenerateExcelReport(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
                 var beginDate = View.DateTimeBegin.Date;
                 var endDate = View.DateTimeEnd.Date.AddDays(1).AddTicks(-1);
-                var list = _shiftCheckRepository.GetSomeWithAllIncludes(sc => sc.DateTimeEntry >= beginDate && sc.DateTimeEntry <= endDate);
+                var list = _shiftCheckRepository.GetSomeWithAllIncludes(sc => (sc.DateTimeEntry >= beginDate && sc.DateTimeEntry <= endDate) || 
+                  (sc.DateTimeExit >= beginDate && sc.DateTimeExit <= endDate));
                 FilterOptions filterOptions =
                     new FilterOptions(beginDate.Date, endDate.Date) {Employee = "All"};
                 if (View.ShowOnlySelectedEmployeeChecks)
@@ -49,9 +48,11 @@ namespace CheckPoint.Presenter
 
                 ShiftChecksExcelReport report =
                     new ShiftChecksExcelReport(list.ToList(), nameof(ShiftChecksExcelReport), filterOptions);
-                report.CreateReport();
-                report.ShowReport();
-            });
+                Task.Run(() =>
+                {
+                    report.CreateReport();
+                    report.ShowReport();
+                });
         }
 
         private void View_OnGenerateTimeSheet(object sender, EventArgs e)

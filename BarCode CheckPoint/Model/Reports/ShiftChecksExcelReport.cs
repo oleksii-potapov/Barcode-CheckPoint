@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CheckPoint.Model.Entities;
 using ClosedXML.Excel;
-using Emgu.CV.Structure;
 
 namespace CheckPoint.Model.Reports
 {
@@ -57,11 +52,11 @@ namespace CheckPoint.Model.Reports
                 i++;
             }
 
-            var Range = worksheet.Range(lastRowIndex, 1, 
+            var range = worksheet.Range(lastRowIndex, 1, 
                 worksheet.RangeUsed().LastRowUsed().RowNumber(),
                 worksheet.RangeUsed().LastColumnUsed().ColumnNumber());
-            Range.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
-            Range.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            range.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            range.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
         }
 
         private void SaveFileToTemp()
