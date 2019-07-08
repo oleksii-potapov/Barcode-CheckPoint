@@ -19,9 +19,15 @@ namespace CheckPoint.View.Forms
         {
             InitializeComponent();
             this.Shown += EmployeeForm_Shown;
+            this.Closing += EmployeeForm_Closed;
             buttonCancel.Click += ButtonCancel_Click;
             buttonOk.Click += ButtonOk_Click;
             buttonChoosePhoto.Click += ButtonChoosePhoto_Click;
+        }
+
+        private void EmployeeForm_Closed(object sender, EventArgs e)
+        {
+            OnFormClose?.Invoke(this, EventArgs.Empty);
         }
 
         private void EmployeeForm_Shown(object sender, EventArgs e)
@@ -76,13 +82,20 @@ namespace CheckPoint.View.Forms
             set => textBarCode.Text = value;
         }
 
-        public BindingList<Post> PostList
+        public bool IsCodeActive
         {
-            get => (BindingList<Post>) comboPosts.DataSource;
+            get => textBarCode.Enabled;
+            set => textBarCode.Enabled = value;
+        }
+
+        public List<Post> PostList
+        {
+            get => (List<Post>) comboPosts.DataSource;
             set => comboPosts.DataSource = value;
         }
 
         public event EventHandler OnFormShow;
+        public event EventHandler OnFormClose;
         public event EventHandler OnApplyChanges;
         public event EventHandler<EventPhotoArgs> OnChoosePhoto;
 

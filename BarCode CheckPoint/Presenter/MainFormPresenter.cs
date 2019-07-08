@@ -14,7 +14,6 @@ namespace CheckPoint.Presenter
     class MainFormPresenter
     {
         private readonly IMessageService _messageService;
-        private readonly ApplicationContext _context;
         private readonly WebCamera _webCamera;
         public IMainForm View { get; }
 
@@ -23,11 +22,10 @@ namespace CheckPoint.Presenter
         public event EventHandler PostListFormShow;
         public event EventHandler ReportsFormShow;
 
-        public MainFormPresenter(IMainForm mainForm, IMessageService messageService, ApplicationContext context)
+        public MainFormPresenter(IMainForm mainForm, IMessageService messageService)
         {
             View = mainForm;
             _messageService = messageService;
-            _context = context;
             _webCamera = new WebCamera();
             _webCamera.StartShowCameraImage();
             // show web-camera image
@@ -78,7 +76,6 @@ namespace CheckPoint.Presenter
         {
             if (_messageService.ShowQuestion("Close program?"))
             {
-                _context.Dispose();
                 View.CloseForm();
             }
         }
@@ -95,7 +92,7 @@ namespace CheckPoint.Presenter
             if (View.BarCode == string.Empty)
                 return;
 
-            var employeeCheck = new EmployeeCheck(View.IsEntry, View.BarCode, _context);
+            var employeeCheck = new EmployeeCheck(View.IsEntry, View.BarCode);
             
             var shiftCheck = employeeCheck.Check();
             if (shiftCheck != null)
@@ -116,8 +113,10 @@ namespace CheckPoint.Presenter
             View.DateTimeEntry = shiftCheck.DateTimeEntry;
             View.DateTimeExit = shiftCheck.DateTimeExit;
             View.CheckPhoto = _webCamera.Snapshot;
-            View.EmployeePhoto = Image.FromFile(Path.Combine(Properties.Settings.Default.EmployeePhotoFolder,
-                string.Format($"{shiftCheck.Employee.FullName}-{shiftCheck.Employee.BarCode}.jpg")));
+            var empPhotoPath = Path.Combine(Properties.Settings.Default.EmployeePhotoFolder,
+                string.Format($"{shiftCheck.Employee.FullName}-{shiftCheck.Employee.BarCode}.jpg"));
+            if (File.Exists(empPhotoPath))
+                View.EmployeePhoto = Image.FromFile(empPhotoPath);
         }
 
         private void SaveCheckPhoto(ShiftCheck shiftCheck)

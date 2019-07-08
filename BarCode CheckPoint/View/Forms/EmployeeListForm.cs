@@ -38,7 +38,7 @@ namespace CheckPoint.View.Forms
 
         private void ButtonCleanFilter_Click(object sender, EventArgs e)
         {
-            textFilter.BackColor = DefaultBackColor;
+            textFilter.BackColor = Color.White;
             OnCleanFilter?.Invoke(this, EventArgs.Empty);
         }
 

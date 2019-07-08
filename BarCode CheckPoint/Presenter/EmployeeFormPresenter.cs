@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CheckPoint.Model;
 using CheckPoint.Model.Entities;
+using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
 
@@ -15,24 +17,33 @@ namespace CheckPoint.Presenter
 {
     class EmployeeFormPresenter
     {
-        private readonly ApplicationContext _context;
         private readonly IMessageService _messageService;
         private Employee _currentEmployee;
         private readonly bool _isNewRecord;
+        private readonly PostRepository _postRepository;
+        private readonly EmployeeRepository _employeeRepository;
         public IEmployeeForm View { get; }
+        public event EventHandler OnFormClose;
 
-        public EmployeeFormPresenter(IMessageService messageService, ApplicationContext context, Employee currentEmployee = null)
+        public EmployeeFormPresenter(IMessageService messageService, EmployeeRepository employeeRepository, Employee currentEmployee = null)
         {
-            _context = context;
             _messageService = messageService;
             _currentEmployee = currentEmployee;
             _isNewRecord = currentEmployee == null;
-            _context.Posts.Load();
-            View = new EmployeeForm() {PostList = _context.Posts.Local.ToBindingList()};
+            _postRepository = new PostRepository();
+            _employeeRepository = employeeRepository;
+
+            View = new EmployeeForm() {PostList = _postRepository.GetAll()};
 
             View.OnFormShow += View_OnFormShow;
             View.OnApplyChanges += View_OnApplyChanges;
             View.OnChoosePhoto += View_OnChoosePhoto;
+            View.OnFormClose += View_OnFormClose;
+        }
+
+        private void View_OnFormClose(object sender, EventArgs e)
+        {
+            OnFormClose?.Invoke(this, EventArgs.Empty);
         }
 
         private void View_OnChoosePhoto(object sender, View.Services.EventPhotoArgs e)
@@ -49,7 +60,7 @@ namespace CheckPoint.Presenter
                 return;
             }
 
-            if (_context.Employees.FirstOrDefault(emp => emp.BarCode == View.BarCode) != null && _isNewRecord)
+            if (_employeeRepository.GetOne(View.BarCode) != null && _isNewRecord)
             {
                 _messageService.ShowError("BarCode already exists in the database!");
                 return;
@@ -72,6 +83,7 @@ namespace CheckPoint.Presenter
 
         private void FillData()
         {
+            _currentEmployee = _employeeRepository.GetOne(_currentEmployee.BarCode);
             View.BarCode = _currentEmployee.BarCode;
             View.FirstName = _currentEmployee.FirstName;
             View.LastName = _currentEmployee.LastName;
@@ -86,14 +98,15 @@ namespace CheckPoint.Presenter
 
         private void AddRecord()
         {
-            _currentEmployee = new Employee();
-            _currentEmployee.BarCode = View.BarCode;
-            _currentEmployee.FirstName = View.FirstName;
-            _currentEmployee.LastName = View.LastName;
-            _currentEmployee.Patronymic = View.Patronymic;
-            _currentEmployee.PostId = View.PostId;
-            _context.Employees.Add(_currentEmployee);
-            _context.SaveChanges();
+            _currentEmployee = new Employee
+            {
+                BarCode = View.BarCode,
+                FirstName = View.FirstName,
+                LastName = View.LastName,
+                Patronymic = View.Patronymic,
+                PostId = View.PostId
+            };
+            _employeeRepository.Add(_currentEmployee);
         }
 
         private void EditRecord()
@@ -103,8 +116,7 @@ namespace CheckPoint.Presenter
             _currentEmployee.LastName = View.LastName;
             _currentEmployee.Patronymic = View.Patronymic;
             _currentEmployee.PostId = View.PostId;
-            _context.Entry(_currentEmployee).State = EntityState.Modified;
-            _context.SaveChanges();
+            _employeeRepository.Update(_currentEmployee);
         }
     }
 }

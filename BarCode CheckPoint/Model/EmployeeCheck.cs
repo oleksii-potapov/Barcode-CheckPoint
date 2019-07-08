@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckPoint.Model.Repositories;
 
 namespace CheckPoint.Model
 {
@@ -12,20 +13,20 @@ namespace CheckPoint.Model
     {
         private readonly bool _isEntry;
         private readonly string _barCode;
-        private readonly ApplicationContext _context;
-        public EmployeeCheck(bool isEntry, string barCode, ApplicationContext context)
+        private readonly ShiftCheckRepository _shiftCheckRepository;
+        private readonly EmployeeRepository _employeeRepository;
+        public EmployeeCheck(bool isEntry, string barCode)
         {
             _isEntry = isEntry;
             _barCode = barCode;
-            _context = context;
+            _shiftCheckRepository = new ShiftCheckRepository();
+            _employeeRepository = new EmployeeRepository();
         }
 
         public ShiftCheck Check()
         {
             ShiftCheck shiftCheck;
-            if (!_context.IsConnected)
-                return null;
-            if (_context.Employees.Find(_barCode) == null)
+            if (_employeeRepository.GetOne(_barCode) == null)
                 return null;
 
             if (_isEntry)
@@ -35,13 +36,11 @@ namespace CheckPoint.Model
                     BarCode = _barCode,
                     DateTimeEntry = DateTime.Now,
                 };
-                _context.ShiftChecks.Add(shiftCheck);
-                _context.SaveChanges();
+                _shiftCheckRepository.Add(shiftCheck);
             }
             else
             {
-                var shifts = _context.ShiftChecks.Where(s => s.BarCode == _barCode);
-                shiftCheck = shifts.OrderByDescending(s => s.DateTimeEntry).FirstOrDefault();
+                shiftCheck = _shiftCheckRepository.GetLastEntryByBarCode(_barCode);
                 if (shiftCheck == null
                     || shiftCheck.DateTimeExit.HasValue
                     || shiftCheck.DateTimeEntry.HasValue
@@ -53,16 +52,15 @@ namespace CheckPoint.Model
                         BarCode = _barCode,
                         DateTimeExit = DateTime.Now,
                     };
-                    _context.ShiftChecks.Add(shiftCheck);
-                    _context.SaveChanges();
+                    _shiftCheckRepository.Add(shiftCheck);
                 }
                 else
                 {
                     shiftCheck.DateTimeExit = DateTime.Now;
-                    _context.Entry(shiftCheck).State = EntityState.Modified;
-                    _context.SaveChanges();
+                    _shiftCheckRepository.Update(shiftCheck);
                 }
             }
+            _shiftCheckRepository.LoadAllIncludes(shiftCheck);
             return shiftCheck;
         }
     }

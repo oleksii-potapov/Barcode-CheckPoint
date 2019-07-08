@@ -14,11 +14,7 @@ namespace CheckPoint.Model
         public ApplicationContext()
             : base("name=CheckPointDB")
         {
-            Configuration.LazyLoadingEnabled = false;
-            IsConnected = false;
         }
-
-        public bool IsConnected;
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<ShiftCheck> ShiftChecks { get; set; }
