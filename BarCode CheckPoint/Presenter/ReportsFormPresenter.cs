@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CheckPoint.Model;
 using CheckPoint.Model.Reports;
+using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
 
@@ -13,17 +14,19 @@ namespace CheckPoint.Presenter
 {
     class ReportsFormPresenter
     {
-        private readonly ApplicationContext _context;
         private readonly IMessageService _messageService;
+        private readonly ShiftCheckRepository _shiftCheckRepository;
         public IReportsForm View { get; }
 
-        public ReportsFormPresenter(IMessageService messageService, ApplicationContext context)
+        public ReportsFormPresenter(IMessageService messageService)
         {
-            _context = context;
+            var employeeRepository = new EmployeeRepository();
+            _shiftCheckRepository = new ShiftCheckRepository();
             _messageService = messageService;
-            View = new ReportsForm();
-            _context.Employees.OrderBy(emp => emp.LastName).ThenBy(emp => emp.FirstName).Load();
-            View.Employees = _context.Employees.Local.ToBindingList();
+            View = new ReportsForm
+            {
+                Employees = employeeRepository.GetBindingList()
+            };
 
             View.OnGenerateTimeSheet += View_OnGenerateTimeSheet;
             View.OnGenerateExcelReport += View_OnGenerateExcelReport;
@@ -35,10 +38,7 @@ namespace CheckPoint.Presenter
             {
                 var beginDate = View.DateTimeBegin.Date;
                 var endDate = View.DateTimeEnd.Date.AddDays(1).AddTicks(-1);
-                var list = _context.ShiftChecks
-                    .Include(sc => sc.Employee)
-                    .Include(emp => emp.Employee.Post)
-                    .Where(sc => sc.DateTimeEntry >= beginDate && sc.DateTimeEntry <= endDate);
+                var list = _shiftCheckRepository.GetSomeWithAllIncludes(sc => sc.DateTimeEntry >= beginDate && sc.DateTimeEntry <= endDate);
                 FilterOptions filterOptions =
                     new FilterOptions(beginDate.Date, endDate.Date) {Employee = "All"};
                 if (View.ShowOnlySelectedEmployeeChecks)

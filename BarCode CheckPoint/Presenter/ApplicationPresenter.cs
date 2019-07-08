@@ -32,7 +32,7 @@ namespace CheckPoint.Presenter
 
         private void _mainFormPresenter_ReportsFormShow(object sender, EventArgs e)
         {
-            ReportsFormPresenter reportsFormPresenter = new ReportsFormPresenter(_messageService, _context);
+            ReportsFormPresenter reportsFormPresenter = new ReportsFormPresenter(_messageService);
             reportsFormPresenter.View.ShowForm();
         }
 
