@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using CheckPoint.Model.Entities;
+using CheckPoint.Model.ImportExport;
 using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
@@ -29,6 +30,22 @@ namespace CheckPoint.Presenter
             View.OnEditEmployee += View_OnEditEmployee;
             View.OnCleanFilter += View_OnCleanFilter;
             View.OnFiltered += View_OnFiltered;
+            View.OnExportEmployees += View_OnExportEmployees;
+            View.OnImportEmployees += View_OnImportEmployees;
+        }
+
+        private void View_OnImportEmployees(object sender, EventArgs e)
+        {
+            var import = new ImportEmployeesFromExcel(View.ImportFileName);
+            import.Import();
+            UpdateEmployees();
+        }
+
+        private void View_OnExportEmployees(object sender, EventArgs e)
+        {
+            var export = new ExportEmployeesToExcel(View.ExportFileName);
+            export.Export();
+            _messageService.ShowMessage("Data exported to file.");
         }
 
         private void View_OnFiltered(object sender, EventArgs e)

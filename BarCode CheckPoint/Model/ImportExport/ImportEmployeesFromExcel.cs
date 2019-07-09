@@ -51,7 +51,7 @@ namespace CheckPoint.Model.ImportExport
                     FirstName = worksheet.Cell(i, 2).Value.ToString(),
                     LastName = worksheet.Cell(i, 3).Value.ToString(),
                     Patronymic = worksheet.Cell(i, 4).Value.ToString(),
-                    Post = post,
+                    PostId = post.PostId,
                 });
             }
             return listEmployees;

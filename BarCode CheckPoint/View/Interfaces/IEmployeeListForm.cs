@@ -11,6 +11,8 @@ namespace CheckPoint.View.Interfaces
         Employee CurrentEmployee { get; set; }
         int SelectedEmployeeIndex { get; set; }
         string Filter { get; set; }
+        string ImportFileName { get; set; }
+        string ExportFileName { get; set; }
 
 
         event EventHandler OnAddEmployee;
@@ -19,5 +21,7 @@ namespace CheckPoint.View.Interfaces
         event EventHandler OnCurrentEmployeeChanged;
         event EventHandler OnFiltered;
         event EventHandler OnCleanFilter;
+        event EventHandler OnExportEmployees;
+        event EventHandler OnImportEmployees;
     }
 }

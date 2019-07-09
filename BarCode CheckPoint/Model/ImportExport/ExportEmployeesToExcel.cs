@@ -29,6 +29,7 @@ namespace CheckPoint.Model.ImportExport
         private void CreateFile()
         {
             _workbook = new XLWorkbook();
+            _workbook.AddWorksheet();
         }
 
         private void SaveFile()

@@ -42,13 +42,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textFilter = new System.Windows.Forms.TextBox();
             this.buttonCleanFilter = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonImport = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gridEmployee)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDelete.Location = new System.Drawing.Point(452, 295);
+            this.buttonDelete.Location = new System.Drawing.Point(452, 258);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(173, 42);
             this.buttonDelete.TabIndex = 9;
@@ -58,7 +62,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonEdit.Location = new System.Drawing.Point(232, 295);
+            this.buttonEdit.Location = new System.Drawing.Point(232, 258);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(173, 42);
             this.buttonEdit.TabIndex = 8;
@@ -68,7 +72,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAdd.Location = new System.Drawing.Point(12, 295);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 258);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(173, 42);
             this.buttonAdd.TabIndex = 7;
@@ -96,7 +100,7 @@
             this.gridEmployee.Name = "gridEmployee";
             this.gridEmployee.ReadOnly = true;
             this.gridEmployee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridEmployee.Size = new System.Drawing.Size(613, 238);
+            this.gridEmployee.Size = new System.Drawing.Size(613, 201);
             this.gridEmployee.TabIndex = 6;
             // 
             // BarCode
@@ -179,11 +183,41 @@
             this.buttonCleanFilter.Text = "Clean and disable filter";
             this.buttonCleanFilter.UseVisualStyleBackColor = true;
             // 
+            // buttonExport
+            // 
+            this.buttonExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonExport.Location = new System.Drawing.Point(12, 326);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(173, 42);
+            this.buttonExport.TabIndex = 13;
+            this.buttonExport.Text = "Export employees to Excel file";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            // 
+            // buttonImport
+            // 
+            this.buttonImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonImport.Location = new System.Drawing.Point(232, 326);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(173, 42);
+            this.buttonImport.TabIndex = 14;
+            this.buttonImport.Text = "Import employees from Excel file";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+            // 
             // EmployeeListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 349);
+            this.ClientSize = new System.Drawing.Size(637, 380);
+            this.Controls.Add(this.buttonImport);
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonCleanFilter);
             this.Controls.Add(this.textFilter);
             this.Controls.Add(this.label1);
@@ -217,5 +251,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textFilter;
         private System.Windows.Forms.Button buttonCleanFilter;
+        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

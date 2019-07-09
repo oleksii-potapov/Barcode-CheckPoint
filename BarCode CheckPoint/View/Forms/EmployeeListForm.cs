@@ -24,7 +24,10 @@ namespace CheckPoint.View.Forms
             gridEmployee.CellDoubleClick += ButtonEdit_Click;
             buttonCleanFilter.Click += ButtonCleanFilter_Click;
             textFilter.KeyUp += TextFilter_KeyUp;
+            buttonExport.Click += ButtonExport_Click;
+            buttonImport.Click += ButtonImport_Click;
         }
+
 
         #region forwarding events
         private void TextFilter_KeyUp(object sender, KeyEventArgs e)
@@ -65,6 +68,19 @@ namespace CheckPoint.View.Forms
             OnAddEmployee?.Invoke(this, EventArgs.Empty);
         }
 
+        private void ButtonImport_Click(object sender, EventArgs e)
+        {
+            if(openFileDialog.ShowDialog() != DialogResult.OK) return;
+            ImportFileName = openFileDialog.FileName;
+            OnImportEmployees?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ButtonExport_Click(object sender, EventArgs e)
+        {
+            if(saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            ExportFileName = saveFileDialog.FileName;
+            OnExportEmployees?.Invoke(this, EventArgs.Empty);
+        }
         #endregion
 
         public BindingList<Employee> Employees
@@ -80,6 +96,9 @@ namespace CheckPoint.View.Forms
             set => textFilter.Text = value;
         }
 
+        public string ImportFileName { get; set; }
+        public string ExportFileName { get; set; }
+
         #region events
 
         public event EventHandler OnAddEmployee;
@@ -88,6 +107,8 @@ namespace CheckPoint.View.Forms
         public event EventHandler OnCurrentEmployeeChanged;
         public event EventHandler OnFiltered;
         public event EventHandler OnCleanFilter;
+        public event EventHandler OnExportEmployees;
+        public event EventHandler OnImportEmployees;
 
         #endregion
 
