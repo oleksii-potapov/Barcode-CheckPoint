@@ -23,5 +23,22 @@ namespace CheckPoint.Model.Repositories
         {
             return Context.Posts.Any(p => p.Name == post);
         }
+
+        public Post FindByName(string postName)
+        {
+            var post = GetSome(p => p.Name == postName)
+                .FirstOrDefault();
+            return post;
+        }
+
+        public Post AddByName(string postName)
+        {
+            var newPost = new Post()
+            {
+                Name = postName,
+            };
+            Add(newPost);
+            return newPost;
+        }
     }
 }

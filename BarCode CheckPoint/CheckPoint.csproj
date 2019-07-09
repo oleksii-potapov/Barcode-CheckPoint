@@ -97,6 +97,10 @@
     <Compile Include="Model\Entities\Employee.cs" />
     <Compile Include="Model\Entities\Post.cs" />
     <Compile Include="Model\Entities\ShiftCheck.cs" />
+    <Compile Include="Model\ImportExport\ExportToExcel.cs" />
+    <Compile Include="Model\ImportExport\IExportData.cs" />
+    <Compile Include="Model\ImportExport\IImportData.cs" />
+    <Compile Include="Model\ImportExport\ImportEmployeesFromExcel.cs" />
     <Compile Include="Model\Reports\ExcelReport.cs" />
     <Compile Include="Model\Reports\FilterOptions.cs" />
     <Compile Include="Model\Reports\ShiftChecksExcelReport.cs" />

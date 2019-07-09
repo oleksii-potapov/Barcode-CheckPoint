@@ -20,7 +20,6 @@ namespace CheckPoint.Presenter
         private readonly IMessageService _messageService;
         private Employee _currentEmployee;
         private readonly bool _isNewRecord;
-        private readonly PostRepository _postRepository;
         private readonly EmployeeRepository _employeeRepository;
         public IEmployeeForm View { get; }
         public event EventHandler OnFormClose;
@@ -30,10 +29,10 @@ namespace CheckPoint.Presenter
             _messageService = messageService;
             _currentEmployee = currentEmployee;
             _isNewRecord = currentEmployee == null;
-            _postRepository = new PostRepository();
+            var postRepository = new PostRepository();
             _employeeRepository = employeeRepository;
 
-            View = new EmployeeForm() {PostList = _postRepository.GetAll()};
+            View = new EmployeeForm() {PostList = postRepository.GetAll()};
 
             View.OnFormShow += View_OnFormShow;
             View.OnApplyChanges += View_OnApplyChanges;
