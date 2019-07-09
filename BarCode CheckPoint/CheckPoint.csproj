@@ -97,7 +97,7 @@
     <Compile Include="Model\Entities\Employee.cs" />
     <Compile Include="Model\Entities\Post.cs" />
     <Compile Include="Model\Entities\ShiftCheck.cs" />
-    <Compile Include="Model\ImportExport\ExportToExcel.cs" />
+    <Compile Include="Model\ImportExport\ExportEmployeesToExcel.cs" />
     <Compile Include="Model\ImportExport\IExportData.cs" />
     <Compile Include="Model\ImportExport\IImportData.cs" />
     <Compile Include="Model\ImportExport\ImportEmployeesFromExcel.cs" />
@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="View\Interfaces\IEmployeeForm.cs" />
     <Compile Include="View\Interfaces\IEmployeeListForm.cs" />
+    <Compile Include="View\Interfaces\IExportImportForm.cs" />
     <Compile Include="View\Interfaces\IForm.cs" />
     <Compile Include="View\Interfaces\IMainForm.cs" />
     <Compile Include="View\Interfaces\IMessageService.cs" />

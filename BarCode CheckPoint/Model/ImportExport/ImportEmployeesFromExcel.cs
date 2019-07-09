@@ -24,12 +24,12 @@ namespace CheckPoint.Model.ImportExport
         public string FileName { get; }
         public void Import()
         {
-            CreateFile();
+            OpenFile();
             var employees = ImportEmployeesToList();
             ImportEmployeesFromListToDataBase(employees);
         }
 
-        private void CreateFile()
+        private void OpenFile()
         {
             _workbook = new XLWorkbook(FileName);
         }

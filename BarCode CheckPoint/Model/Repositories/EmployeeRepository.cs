@@ -20,5 +20,12 @@ namespace CheckPoint.Model.Repositories
             _bindingList = Context.Employees.Local.ToBindingList();
             return _bindingList;
         }
+
+        public IEnumerable<Employee> GetAllWithIncludes()
+        {
+            return Context.Employees.AsNoTracking()
+                .Include("Post")
+                .ToList();
+        }
     }
 }
