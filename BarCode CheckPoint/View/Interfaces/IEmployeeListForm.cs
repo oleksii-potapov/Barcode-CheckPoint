@@ -10,6 +10,7 @@ namespace CheckPoint.View.Interfaces
         BindingList<Employee> Employees { get; set; }
         Employee CurrentEmployee { get; set; }
         int SelectedEmployeeIndex { get; set; }
+        IEnumerable<Employee> SelectedEmployees { get; }
         string Filter { get; set; }
         string ImportFileName { get; set; }
         string ExportFileName { get; set; }

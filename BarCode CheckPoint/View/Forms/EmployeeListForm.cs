@@ -90,6 +90,24 @@ namespace CheckPoint.View.Forms
         }
         public Employee CurrentEmployee { get; set; }
         public int SelectedEmployeeIndex { get; set; }
+
+        public IEnumerable<Employee> SelectedEmployees
+        {
+            get
+            {
+                var rows = gridEmployee.SelectedRows;
+                if (rows.Count < 1)
+                    return null;
+                List<Employee> employees = new List<Employee>();
+                foreach (DataGridViewRow row in rows)
+                {
+                    employees.Add(row.DataBoundItem as Employee);
+                }
+
+                return employees;
+            }
+        }
+
         public string Filter
         {
             get => textFilter.Text;

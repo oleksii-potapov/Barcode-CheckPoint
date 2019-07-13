@@ -79,26 +79,7 @@ namespace CheckPoint.Model.Repositories
 
         internal int SaveChanges()
         {
-            try
-            {
-                return _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw;
-            }
-            catch (RetryLimitExceededException ex)
-            {
-                throw;
-            }
-            catch (DbUpdateException ex)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return _context.SaveChanges();
         }
     }
 }

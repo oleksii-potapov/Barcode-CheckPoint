@@ -96,7 +96,6 @@
             this.Patronymic,
             this.PostId});
             this.gridEmployee.Location = new System.Drawing.Point(12, 51);
-            this.gridEmployee.MultiSelect = false;
             this.gridEmployee.Name = "gridEmployee";
             this.gridEmployee.ReadOnly = true;
             this.gridEmployee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

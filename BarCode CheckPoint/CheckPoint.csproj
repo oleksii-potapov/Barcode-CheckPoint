@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="ClosedXML, Version=0.95.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.95.0-beta1\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
@@ -62,6 +63,9 @@
     <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
     </Reference>
+    <Reference Include="FastReport, Version=2019.3.13.0, Culture=neutral, PublicKeyToken=406e1f4c3c8ef97e, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastReport.OpenSource.2019.3.13\lib\net40\FastReport.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -76,6 +80,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -103,6 +108,9 @@
     <Compile Include="Model\ImportExport\ImportEmployeesFromExcel.cs" />
     <Compile Include="Model\Reports\ExcelReport.cs" />
     <Compile Include="Model\Reports\FilterOptions.cs" />
+    <Compile Include="Model\Reports\Interfaces\IReportExporter.cs" />
+    <Compile Include="Model\Reports\Interfaces\IReportGenerator.cs" />
+    <Compile Include="Model\Reports\PassReportGenerator.cs" />
     <Compile Include="Model\Reports\ShiftChecksExcelReport.cs" />
     <Compile Include="Model\Repositories\BaseRepository.cs" />
     <Compile Include="Model\Repositories\EmployeeRepository.cs" />

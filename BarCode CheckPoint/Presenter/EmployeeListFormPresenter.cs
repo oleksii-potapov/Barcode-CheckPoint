@@ -36,15 +36,13 @@ namespace CheckPoint.Presenter
 
         private void View_OnImportEmployees(object sender, EventArgs e)
         {
-            var import = new ImportEmployeesFromExcel(View.ImportFileName);
-            import.Import();
+            ImportEmployees(new ImportEmployeesFromExcel(View.ImportFileName));
             UpdateEmployees();
         }
 
         private void View_OnExportEmployees(object sender, EventArgs e)
         {
-            var export = new ExportEmployeesToExcel(View.ExportFileName);
-            export.Export();
+            ExportEmployees(new ExportEmployeesToExcel(View.ExportFileName));
             _messageService.ShowMessage("Data exported to file.");
         }
 
@@ -111,6 +109,16 @@ namespace CheckPoint.Presenter
                     
                 View.Employees = new BindingList<Employee>(View.Employees.AsQueryable().Where(@where).ToList());
             }
+        }
+
+        private void ImportEmployees(IImportData import)
+        {
+            import.Import();
+        }
+
+        private void ExportEmployees(IExportData export)
+        {
+            export.Export();
         }
     }
 }
