@@ -8,6 +8,7 @@ using CheckPoint.Model.Entities;
 using CheckPoint.Model.ImportExport;
 using CheckPoint.Model.Reports;
 using CheckPoint.Model.Repositories;
+using CheckPoint.Service;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
 
@@ -41,14 +42,13 @@ namespace CheckPoint.Presenter
         private void View_OnGeneratePasses(object sender, EventArgs e)
         {
             PassReportGenerator passReport = new PassReportGenerator(View.SelectedEmployees);
-            passReport.LoadTemplate(Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, "ReportTemplates", "PassCard.frx"));
+            passReport.LoadTemplate(Path.Combine(ProjectDirectories.GetReportsTemplatesDirectory(), "PassCard.frx"));
             passReport.GenerateReport();
-            var savePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TempReports");
-            if (!Directory.Exists(savePath))
-                Directory.CreateDirectory(savePath);
-            savePath = Path.Combine(savePath, "report.png");
+            var savePath = Path.Combine(ProjectDirectories.GetTempReportsDirectory(), "report.png");
+            ProjectDirectories.CreateTempReportsIfNoExists();
+            ProjectDirectories.DeleteAllFilesFromTempReports();
             passReport.Export(savePath);
-            System.Diagnostics.Process.Start(savePath);
+            ProjectDirectories.OpenReport();
         }
 
         private void View_OnImportEmployees(object sender, EventArgs e)
