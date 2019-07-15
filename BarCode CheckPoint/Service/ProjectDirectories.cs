@@ -12,12 +12,14 @@ namespace CheckPoint.Service
         private static readonly string _temp;
         private static readonly string _tempReports;
         private static readonly string _reportTemplates;
+
         static ProjectDirectories()
         {
             _temp = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Temp");
             _tempReports = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TempReports");
             _reportTemplates = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ReportTemplates");
         }
+
         public static void DeleteAllFilesFromTemp()
         {
             DeleteFiles(_temp);
@@ -34,9 +36,12 @@ namespace CheckPoint.Service
             {
                 FileAttributes fa = File.GetAttributes(entry);
                 if (fa.HasFlag(FileAttributes.Directory))
+                {
                     DeleteFiles(entry);
-                // delete file or empty directory
-                File.Delete(entry);
+                    Directory.Delete(entry);
+                }
+                else
+                    File.Delete(entry);
             }
         }
 
@@ -55,6 +60,7 @@ namespace CheckPoint.Service
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
         }
+
         public static void OpenReport()
         {
             System.Diagnostics.Process.Start(Path.Combine(_tempReports, "report.png"));
