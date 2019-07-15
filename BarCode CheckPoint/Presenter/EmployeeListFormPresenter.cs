@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.ExceptionServices;
 using CheckPoint.Model.Entities;
 using CheckPoint.Model.ImportExport;
+using CheckPoint.Model.Reports;
 using CheckPoint.Model.Repositories;
 using CheckPoint.View.Forms;
 using CheckPoint.View.Interfaces;
@@ -32,6 +35,20 @@ namespace CheckPoint.Presenter
             View.OnFiltered += View_OnFiltered;
             View.OnExportEmployees += View_OnExportEmployees;
             View.OnImportEmployees += View_OnImportEmployees;
+            View.OnGeneratePasses += View_OnGeneratePasses;
+        }
+
+        private void View_OnGeneratePasses(object sender, EventArgs e)
+        {
+            PassReportGenerator passReport = new PassReportGenerator(View.SelectedEmployees);
+            passReport.LoadTemplate(Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, "ReportTemplates", "PassCard.frx"));
+            passReport.GenerateReport();
+            var savePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TempReports");
+            if (!Directory.Exists(savePath))
+                Directory.CreateDirectory(savePath);
+            savePath = Path.Combine(savePath, "report.png");
+            passReport.Export(savePath);
+            System.Diagnostics.Process.Start(savePath);
         }
 
         private void View_OnImportEmployees(object sender, EventArgs e)

@@ -26,7 +26,9 @@ namespace CheckPoint.View.Forms
             textFilter.KeyUp += TextFilter_KeyUp;
             buttonExport.Click += ButtonExport_Click;
             buttonImport.Click += ButtonImport_Click;
+            buttonPasses.Click += ButtonPasses_Click;
         }
+
 
 
         #region forwarding events
@@ -81,6 +83,10 @@ namespace CheckPoint.View.Forms
             ExportFileName = saveFileDialog.FileName;
             OnExportEmployees?.Invoke(this, EventArgs.Empty);
         }
+        private void ButtonPasses_Click(object sender, EventArgs e)
+        {
+            OnGeneratePasses?.Invoke(this, EventArgs.Empty);
+        }
         #endregion
 
         public BindingList<Employee> Employees
@@ -127,6 +133,7 @@ namespace CheckPoint.View.Forms
         public event EventHandler OnCleanFilter;
         public event EventHandler OnExportEmployees;
         public event EventHandler OnImportEmployees;
+        public event EventHandler OnGeneratePasses;
 
         #endregion
 

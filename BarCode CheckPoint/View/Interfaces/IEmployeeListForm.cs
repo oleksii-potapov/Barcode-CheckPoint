@@ -24,5 +24,6 @@ namespace CheckPoint.View.Interfaces
         event EventHandler OnCleanFilter;
         event EventHandler OnExportEmployees;
         event EventHandler OnImportEmployees;
+        event EventHandler OnGeneratePasses;
     }
 }

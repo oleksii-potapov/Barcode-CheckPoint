@@ -29,7 +29,7 @@ namespace CheckPoint.Model.Reports
 
         private void OpenTemplate()
         {
-            Workbook = new XLWorkbook(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports",
+            Workbook = new XLWorkbook(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ReportTemplates",
                 ReportTemplateName + ".xlsx"));
         }
 

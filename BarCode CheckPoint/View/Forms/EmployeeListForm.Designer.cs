@@ -46,6 +46,7 @@
             this.buttonImport = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.buttonPasses = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridEmployee)).BeginInit();
             this.SuspendLayout();
             // 
@@ -210,11 +211,22 @@
             // 
             this.saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
             // 
+            // buttonPasses
+            // 
+            this.buttonPasses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonPasses.Location = new System.Drawing.Point(452, 326);
+            this.buttonPasses.Name = "buttonPasses";
+            this.buttonPasses.Size = new System.Drawing.Size(173, 42);
+            this.buttonPasses.TabIndex = 15;
+            this.buttonPasses.Text = "Generate pass-cards for employees";
+            this.buttonPasses.UseVisualStyleBackColor = true;
+            // 
             // EmployeeListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 380);
+            this.Controls.Add(this.buttonPasses);
             this.Controls.Add(this.buttonImport);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonCleanFilter);
@@ -254,5 +266,6 @@
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button buttonPasses;
     }
 }

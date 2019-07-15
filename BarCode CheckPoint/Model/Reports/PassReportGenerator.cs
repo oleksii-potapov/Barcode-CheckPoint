@@ -33,15 +33,18 @@ namespace CheckPoint.Model.Reports
 
         public void GenerateReport()
         {
-            var passEmployees = _employees.Select(emp => new
-            {
-                emp.BarCode,
-                emp.FirstName,
-                emp.LastName,
-                emp.Patronymic,
-                Post = emp.Post.Name,
-                PhotoPath = emp.FullName + "-" + emp.BarCode + ".png",
-            });
+            var passEmployees = _employees
+                .OrderBy(emp => emp.LastName)
+                .Select(emp => new
+                {
+                    emp.BarCode,
+                    emp.FirstName,
+                    emp.LastName,
+                    emp.Patronymic,
+                    Post = emp.Post.Name,
+                    PhotoPath = Path.Combine(Properties.Settings.Default.EmployeePhotoFolder,
+                        emp.FullName + "-" + emp.BarCode + ".jpg"),
+                });
             _report.RegisterData(passEmployees, "Employees");
             _report.Prepare();
             IsPrepared = true;
@@ -49,7 +52,8 @@ namespace CheckPoint.Model.Reports
 
         public void Export(string fileName)
         {
-            if (!IsPrepared) return;
+            if (!IsPrepared)
+                return;
             _export.ImageFormat = ImageExportFormat.Png;
             _export.Resolution = 300;
             _export.SeparateFiles = true;
