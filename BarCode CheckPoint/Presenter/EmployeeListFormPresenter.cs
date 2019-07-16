@@ -48,7 +48,7 @@ namespace CheckPoint.Presenter
             ProjectDirectories.CreateTempReportsIfNoExists();
             ProjectDirectories.DeleteAllFilesFromTempReports();
             passReport.Export(savePath);
-            ProjectDirectories.OpenReport();
+            passReport.OpenReport();
         }
 
         private void View_OnImportEmployees(object sender, EventArgs e)

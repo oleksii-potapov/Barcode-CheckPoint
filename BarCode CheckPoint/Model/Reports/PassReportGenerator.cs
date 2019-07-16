@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using CheckPoint.Model.Entities;
 using CheckPoint.Model.Reports.Interfaces;
+using CheckPoint.Service;
 using FastReport;
 using FastReport.Export.Image;
 
@@ -58,6 +59,13 @@ namespace CheckPoint.Model.Reports
             _export.Resolution = 300;
             _export.SeparateFiles = true;
             _export.Export(_report, fileName);
+        }
+
+        public void OpenReport()
+        {
+            if (IsPrepared)
+                System.Diagnostics.Process.Start(Path.Combine(ProjectDirectories.GetTempReportsDirectory(),
+                    "report.png"));
         }
     }
 }

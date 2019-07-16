@@ -61,11 +61,6 @@ namespace CheckPoint.Service
                 Directory.CreateDirectory(directory);
         }
 
-        public static void OpenReport()
-        {
-            System.Diagnostics.Process.Start(Path.Combine(_tempReports, "report.png"));
-        }
-
         public static string GetTempDirectory()
         {
             return _temp;

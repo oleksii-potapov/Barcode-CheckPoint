@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using CheckPoint.Model.Entities;
+using CheckPoint.Service;
 using ClosedXML.Excel;
 
 namespace CheckPoint.Model.Reports
@@ -29,7 +30,7 @@ namespace CheckPoint.Model.Reports
 
         private void OpenTemplate()
         {
-            Workbook = new XLWorkbook(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ReportTemplates",
+            Workbook = new XLWorkbook(Path.Combine(ProjectDirectories.GetReportsTemplatesDirectory(),
                 ReportTemplateName + ".xlsx"));
         }
 
