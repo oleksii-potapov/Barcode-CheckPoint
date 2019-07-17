@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CheckPoint.Model.TimeSheet
 {
-    class TimeSheetRecord
+    [Serializable]
+    public class TimeSheetRecord
     {
         public string Barcode { get; set; }
         public string FullName { get; set; }

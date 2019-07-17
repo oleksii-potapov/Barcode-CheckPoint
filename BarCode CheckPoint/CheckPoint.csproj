@@ -117,6 +117,8 @@
     <Compile Include="Model\Repositories\IRepository.cs" />
     <Compile Include="Model\Repositories\PostRepository.cs" />
     <Compile Include="Model\Repositories\ShiftCheckRepository.cs" />
+    <Compile Include="Model\TimeSheet\ITimeSheetGenerator.cs" />
+    <Compile Include="Model\TimeSheet\TimeSheetGenerator.cs" />
     <Compile Include="Model\TimeSheet\TimeSheetRecord.cs" />
     <Compile Include="Presenter\ApplicationPresenter.cs" />
     <Compile Include="Presenter\EmployeeFormPresenter.cs" />
