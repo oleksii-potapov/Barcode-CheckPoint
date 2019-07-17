@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using CheckPoint.Model.Entities;
 using CheckPoint.Model.Reports;
 using CheckPoint.Model.Repositories;
@@ -78,6 +80,13 @@ namespace CheckPoint.Presenter
             TimeSheetGenerator generator = new TimeSheetGenerator(list.ToList());
             generator.Generate();
             var sheetRecords = generator.SheetRecords;
+
+            // testing of sheet creation 
+            var serializer = new XmlSerializer(sheetRecords.GetType());
+            using (var stream = File.Create(@"D:\Desktop\1.xml"))
+            {
+                serializer.Serialize(stream, sheetRecords);
+            }
         }
     }
 }

@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CheckPoint.Model.Entities;
 
 namespace CheckPoint.Model.TimeSheet
 {
-    class TimeSheetGenerator: ITimeSheetGenerator
+    class TimeSheetGenerator : ITimeSheetGenerator
     {
         private readonly List<TimeSheetRecord> _sheetRecords;
         private readonly List<ShiftCheck> _checks;
-        private TimeSpan _startOfDayShift;
-        private TimeSpan _endOfDayShift;
+        private readonly TimeSpan _startOfDayShift;
+        private readonly TimeSpan _endOfDayShift;
+
         public TimeSheetGenerator(List<ShiftCheck> checks)
         {
             _sheetRecords = new List<TimeSheetRecord>();
             _checks = checks;
+
+            //TODO add shift hours to settings
             _startOfDayShift = new TimeSpan(6, 0, 0);
             _endOfDayShift = new TimeSpan(22, 0, 0);
         }
 
-        public List<TimeSheetRecord> SheetRecords
-        {
-            get { return _sheetRecords; }
-        }
+        public List<TimeSheetRecord> SheetRecords => _sheetRecords;
 
         public void Generate()
         {
@@ -43,49 +41,57 @@ namespace CheckPoint.Model.TimeSheet
 
         private void CheckShiftHours(ShiftCheck check)
         {
-            int round = 1;
+            // variable that will change to calculate hours
             DateTime currentDate = check.DateTimeEntry ?? check.DateTimeExit ?? DateTime.MaxValue;
             DateTime endDate = check.DateTimeExit ?? check.DateTimeEntry ?? DateTime.MinValue;
-            TimeSpan timeStart = new TimeSpan();
-            TimeSpan timeEnd = new TimeSpan();
+            TimeSpan periodStart = new TimeSpan();
+            TimeSpan periodEnd = new TimeSpan();
+            int round = 1;
+
             while (true)
             {
+                // Check the period to compare
                 switch (round)
                 {
                     case 1:
-                        timeStart = TimeSpan.FromHours(0);
-                        timeEnd = TimeSpan.FromHours(6);
+                        periodStart = TimeSpan.FromHours(0);
+                        periodEnd = _startOfDayShift;
                         break;
                     case 2:
-                        timeStart = TimeSpan.FromHours(6);
-                        timeEnd = TimeSpan.FromHours(22);
+                        periodStart = _startOfDayShift;
+                        periodEnd = _endOfDayShift;
                         break;
                     case 3:
-                        timeStart = TimeSpan.FromHours(22);
-                        timeEnd = TimeSpan.Parse("23:59:59:999");
+                        periodStart = _endOfDayShift;
+                        periodEnd = TimeSpan.Parse("23:59:59.9999999");
                         break;
                 }
 
-                if (currentDate.TimeOfDay >= timeStart &&
-                    currentDate.TimeOfDay < timeEnd)
+                // check if variable is in a given period
+                if (currentDate.TimeOfDay >= periodStart &&
+                    currentDate.TimeOfDay < periodEnd)
                 {
-                    var temp = currentDate.Date + timeEnd;
+                    var temp = currentDate.Date + periodEnd;
+                    // if this is the last check loop must be stopped
                     if (temp >= endDate)
                     {
-                        temp = endDate;
-                        var hours = (temp - currentDate).Hours;
-                        AddShiftRecord(check.BarCode, check.Employee.FullName, check.Employee.Post.Name, temp, round, hours);
+                        var hours = (endDate - currentDate).Hours;
+                        AddShiftRecord(check.BarCode, check.Employee.FullName, check.Employee.Post.Name, temp, round,
+                            hours);
                         return;
                     }
+                    // if not then add shift record and displace variable to the next period
                     else
                     {
                         var hours = (temp - currentDate).Hours;
-                        AddShiftRecord(check.BarCode, check.Employee.FullName, check.Employee.Post.Name, temp, round, hours);
-                        currentDate = currentDate.Date + timeEnd;
+                        AddShiftRecord(check.BarCode, check.Employee.FullName, check.Employee.Post.Name, temp, round,
+                            hours);
+                        currentDate = currentDate.Date + periodEnd;
                     }
                 }
 
                 round++;
+                // if it was the last check of day then variable displace to the next day
                 if (round == 4)
                 {
                     round = 1;
@@ -114,7 +120,8 @@ namespace CheckPoint.Model.TimeSheet
                     break;
             }
 
-            var record = SheetRecords.FirstOrDefault(sr => sr.Date == tempDate && sr.Barcode == barCode);
+            // check if record with this data is already in list
+            var record = _sheetRecords.FirstOrDefault(sr => sr.Date == tempDate && sr.Barcode == barCode);
             if (record != null)
             {
                 if (shift == 1)
@@ -133,7 +140,7 @@ namespace CheckPoint.Model.TimeSheet
                     FullName = fullName,
                     Post = post
                 };
-                SheetRecords.Add(sheetRecord);
+                _sheetRecords.Add(sheetRecord);
             }
         }
     }
