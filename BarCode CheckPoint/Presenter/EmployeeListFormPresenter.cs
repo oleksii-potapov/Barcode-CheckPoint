@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
 using CheckPoint.Model.Entities;
 using CheckPoint.Model.ImportExport;
 using CheckPoint.Model.Reports;
@@ -54,7 +55,7 @@ namespace CheckPoint.Presenter
         private void View_OnImportEmployees(object sender, EventArgs e)
         {
             ImportEmployees(new ImportEmployeesFromExcel(View.ImportFileName));
-            UpdateEmployees();
+            Task.Run(UpdateEmployees);
         }
 
         private void View_OnExportEmployees(object sender, EventArgs e)
@@ -91,9 +92,11 @@ namespace CheckPoint.Presenter
             if (employeeToDelete == null) return;
             if (_shiftCheckRepository.GetSome(sc => sc.BarCode == View.CurrentEmployee.BarCode).Count > 0)
             {
-                _messageService.ShowError("There are records in ShiftCheck table with this employee." + Environment.NewLine + "Deletion of this record is impossible.");
+                _messageService.ShowError("There are records in ShiftCheck table with this employee." +
+                                          Environment.NewLine + "Deletion of this record is impossible.");
                 return;
             }
+
             try
             {
                 _employeeRepository.Delete(employeeToDelete);
@@ -103,12 +106,14 @@ namespace CheckPoint.Presenter
                 _messageService.ShowError("Record was not deleted." + Environment.NewLine +
                                           "Error message: " + exception.Message);
             }
+
             UpdateEmployees();
         }
 
         private void View_OnAddEmployee(object sender, EventArgs e)
         {
-            EmployeeFormPresenter addEmployeeFormPresenter = new EmployeeFormPresenter(_messageService, _employeeRepository);
+            EmployeeFormPresenter addEmployeeFormPresenter =
+                new EmployeeFormPresenter(_messageService, _employeeRepository);
             addEmployeeFormPresenter.View.IsCodeActive = true;
             addEmployeeFormPresenter.OnFormClose += (o, args) => UpdateEmployees();
             addEmployeeFormPresenter.View.ShowForm();
@@ -119,11 +124,11 @@ namespace CheckPoint.Presenter
             View.Employees = _employeeRepository.GetBindingList();
             if (_isFiltered)
             {
-                Expression <Func<Employee, bool>> @where = (emp) =>
+                Expression<Func<Employee, bool>> @where = (emp) =>
                     emp.FirstName.ToUpper().Contains(View.Filter.ToUpper()) ||
                     emp.LastName.ToUpper().Contains(View.Filter.ToUpper()) ||
                     emp.Patronymic.ToUpper().Contains(View.Filter.ToUpper());
-                    
+
                 View.Employees = new BindingList<Employee>(View.Employees.AsQueryable().Where(@where).ToList());
             }
         }

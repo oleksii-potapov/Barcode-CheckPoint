@@ -79,6 +79,13 @@ namespace CheckPoint.Model.ImportExport
                     employee = item;
                     isNewEmployee = true;
                 }
+                else
+                {
+                    employee.FirstName = item.FirstName;
+                    employee.LastName = item.LastName;
+                    employee.Patronymic = item.Patronymic;
+                    employee.PostId = item.PostId;
+                }
 
                 if (isNewEmployee)
                     _employeeRepository.Add(employee);
