@@ -54,8 +54,11 @@ namespace CheckPoint.Presenter
 
         private void View_OnImportEmployees(object sender, EventArgs e)
         {
-            ImportEmployees(new ImportEmployeesFromExcel(View.ImportFileName));
-            Task.Run(UpdateEmployees);
+            _ = Task.Run(() =>
+            {
+                ImportEmployees(new ImportEmployeesFromExcel(View.ImportFileName));
+                _messageService.ShowMessage("Employees imported, please restart  the application.");
+            });
         }
 
         private void View_OnExportEmployees(object sender, EventArgs e)
