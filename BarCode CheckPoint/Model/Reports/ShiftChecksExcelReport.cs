@@ -9,32 +9,12 @@ namespace CheckPoint.Model.Reports
 {
     class ShiftChecksExcelReport : ExcelReport<ShiftCheck>
     {
-        private string _fileName;
-
         public ShiftChecksExcelReport(IEnumerable<ShiftCheck> dataOfReport, string reportTemplateName, FilterOptions filterOptions) : base(dataOfReport,
             reportTemplateName, filterOptions)
         {
         }
 
-        public override void CreateReport()
-        {
-            OpenTemplate();
-            FillData();
-            SaveFileToTemp();
-        }
-
-        public override void ShowReport()
-        {
-            System.Diagnostics.Process.Start(_fileName);
-        }
-
-        private void OpenTemplate()
-        {
-            Workbook = new XLWorkbook(Path.Combine(ProjectDirectories.GetReportsTemplatesDirectory(),
-                ReportTemplateName + ".xlsx"));
-        }
-
-        private void FillData()
+        protected override void FillData()
         {
             var worksheet = Workbook.Worksheet(1);
             var lastRowIndex = worksheet.RangeUsed().LastRowUsed().RowNumber();
@@ -60,13 +40,5 @@ namespace CheckPoint.Model.Reports
             range.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
         }
 
-        private void SaveFileToTemp()
-        {
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Temp");
-            if (Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            _fileName = Path.Combine(path, string.Format($"{ReportTemplateName} {DateTime.Now:ddMMyyyy_HHmmss}.xlsx"));
-            Workbook.SaveAs(_fileName);
-        }
     }
 }

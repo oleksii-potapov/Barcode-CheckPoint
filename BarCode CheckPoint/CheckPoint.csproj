@@ -112,6 +112,7 @@
     <Compile Include="Model\Reports\Interfaces\IReportGenerator.cs" />
     <Compile Include="Model\Reports\PassReportGenerator.cs" />
     <Compile Include="Model\Reports\ShiftChecksExcelReport.cs" />
+    <Compile Include="Model\Reports\TimeSheetReport.cs" />
     <Compile Include="Model\Repositories\BaseRepository.cs" />
     <Compile Include="Model\Repositories\EmployeeRepository.cs" />
     <Compile Include="Model\Repositories\IRepository.cs" />
