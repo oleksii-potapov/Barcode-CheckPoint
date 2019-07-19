@@ -75,7 +75,8 @@ namespace CheckPoint.Model.TimeSheet
                     // if this is the last check loop must be stopped
                     if (temp >= endDate)
                     {
-                        var hours = (endDate - currentDate).Hours;
+                        temp = endDate;
+                        var hours = (int) Math.Round((temp - currentDate).TotalMinutes / 60);
                         AddShiftRecord(check.BarCode, check.Employee.FullName, check.Employee.Post.Name, temp, round,
                             hours);
                         return;
@@ -83,7 +84,7 @@ namespace CheckPoint.Model.TimeSheet
                     // if not then add shift record and displace variable to the next period
                     else
                     {
-                        var hours = (temp - currentDate).Hours;
+                        var hours = (int) Math.Round((temp - currentDate).TotalMinutes / 60);
                         AddShiftRecord(check.BarCode, check.Employee.FullName, check.Employee.Post.Name, temp, round,
                             hours);
                         currentDate = currentDate.Date + periodEnd;
@@ -116,7 +117,7 @@ namespace CheckPoint.Model.TimeSheet
                     break;
                 case 3:
                     tempDate = date.Date;
-                    shift = 1;
+                    shift = 2;
                     break;
             }
 

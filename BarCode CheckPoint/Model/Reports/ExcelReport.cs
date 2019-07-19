@@ -43,7 +43,7 @@ namespace CheckPoint.Model.Reports
         {
             ProjectDirectories.CreateTempIfNoExists();
             var path = ProjectDirectories.GetTempDirectory();
-            _fileName = Path.Combine(path, string.Format($"{ReportTemplateName} {DateTime.Now:ddMMyyyy_HHmmss}.xlsx"));
+            _fileName = Path.Combine(path, string.Format($"{ReportTemplateName} {DateTime.Now:ddMMyyyy_HHmmssfff}.xlsx"));
             Workbook.SaveAs(_fileName);
         }
         public void ShowReport()

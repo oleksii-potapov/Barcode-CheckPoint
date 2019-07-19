@@ -63,7 +63,7 @@ namespace CheckPoint.Presenter
                 filterOptions.Employee = View.EmployeeName;
             }
 
-            ShiftChecksExcelReport report =
+            ExcelReport<ShiftCheck> report =
                 new ShiftChecksExcelReport(list.ToList(), nameof(ShiftChecksExcelReport), filterOptions);
             Task.Run(() =>
             {
@@ -81,12 +81,14 @@ namespace CheckPoint.Presenter
             generator.Generate();
             var sheetRecords = generator.SheetRecords;
 
-            // testing of sheet creation 
-            var serializer = new XmlSerializer(sheetRecords.GetType());
-            using (var stream = File.Create(@"D:\Desktop\1.xml"))
+            FilterOptions filterOptions =
+                new FilterOptions(beginDate.Date, endDate.Date);
+            ExcelReport<TimeSheetRecord> report = new TimeSheetReport(sheetRecords, nameof(TimeSheetReport), filterOptions);
+            Task.Run(() =>
             {
-                serializer.Serialize(stream, sheetRecords);
-            }
+                report.CreateReport();
+                report.ShowReport();
+            });
         }
     }
 }

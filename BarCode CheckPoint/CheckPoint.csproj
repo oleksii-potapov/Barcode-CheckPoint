@@ -221,7 +221,9 @@
     <None Include="ReportTemplates\ShiftChecksExcelReport.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="ReportTemplates\TimeSheet.xlsx" />
+    <None Include="ReportTemplates\TimeSheetReport.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
